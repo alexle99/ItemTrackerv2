@@ -9,7 +9,7 @@ export const Navbar = () => {
           marginBottom: '2%',
           alignItems: 'center',
           backgroundColor: 'black',
-          borderBottom: '1px white solid',
+          borderBottom: '2px white solid',
         }}
       >
         <Toolbar>
