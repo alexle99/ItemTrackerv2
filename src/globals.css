@@ -1,0 +1,14 @@
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html {
+  color: white;
+  font-size: 16;
+  min-height: 100vh;
+  font-family: monospace;
+  box-sizing: border-box;
+  background-color: black;
+}
