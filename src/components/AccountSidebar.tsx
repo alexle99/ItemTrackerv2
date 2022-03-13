@@ -12,17 +12,23 @@ export const AccountSidebar = ({
   onSelect,
 }: {
   accounts: Account[];
-  onSelect: (id: string) => void;
+  onSelect: (accont: Account) => void;
 }) => {
   return (
-    <Box sx={{ width: '100%', maxWidth: 360, backgroundColor: 'black' }}>
+    <Box
+      sx={{
+        width: '30%',
+        backgroundColor: 'black',
+        border: '1px white solid',
+      }}
+    >
       <List>
-        {accounts.map(({ id, userName }) => (
-          <ListItem key={id} disablePadding>
-            <ListItemButton onClick={() => onSelect(id)}>
+        {accounts.map((account) => (
+          <ListItem key={account.id} disablePadding>
+            <ListItemButton onClick={() => onSelect(account)}>
               <ListItemText
                 disableTypography
-                primary={userName}
+                primary={account.userName}
                 sx={{ fontSize: '2rem' }}
               />
             </ListItemButton>

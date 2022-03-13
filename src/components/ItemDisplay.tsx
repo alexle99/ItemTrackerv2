@@ -1,5 +1,12 @@
-import { Items } from '@/types/account';
+import { Box } from '@mui/material';
+import { Item } from '@/types/account';
 
-export const ItemDisplay = ({ items = [] }: { items?: Items[] }) => {
-  return <></>;
+export const ItemDisplay = ({ items = [] }: { items?: Item[] }) => {
+  return (
+    <>
+      {items.map((item) => {
+        return <Box key={item.id}>{item.name}</Box>;
+      })}
+    </>
+  );
 };
