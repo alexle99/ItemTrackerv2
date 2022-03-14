@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, Button } from '@mui/material';
+import { Box, Button, Grid } from '@mui/material';
 import { v4 as uuid } from 'uuid';
 import { AccountSidebar, ItemDisplay, Navbar } from '@/components';
 import { Account, Item } from '@/types/account';
@@ -51,11 +51,22 @@ export const App = () => {
   return (
     <Box>
       <Navbar />
-      <Button variant="contained" onClick={() => addRandomAccounts(10)}>
+      <Button
+        variant="contained"
+        sx={{ width: '100%' }}
+        onClick={() => addRandomAccounts(10)}
+      >
         ADD RANDOM ACCOUNTS
       </Button>
-      <AccountSidebar accounts={accounts} onSelect={handleSelected} />
-      <ItemDisplay items={selectedAccount?.items} />
+
+      <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 5fr' }}>
+        <Box sx={{ border: '1px white solid' }}>
+          <AccountSidebar accounts={accounts} onSelect={handleSelected} />
+        </Box>
+        <Box sx={{ border: '1px pink solid' }}>
+          <ItemDisplay items={selectedAccount?.items} />
+        </Box>
+      </Box>
     </Box>
   );
 };

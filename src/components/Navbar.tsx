@@ -2,7 +2,7 @@ import { AppBar, Box, Toolbar } from '@mui/material';
 
 export const Navbar = () => {
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ width: '100%' }}>
       <AppBar
         position="static"
         sx={{

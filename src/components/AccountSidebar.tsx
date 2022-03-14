@@ -1,39 +1,60 @@
 import {
   Box,
+  Button,
+  Divider,
   List,
   ListItem,
   ListItemButton,
   ListItemText,
 } from '@mui/material';
 import { Account } from '@/types/account';
+import { Header } from './Header';
+
+const AccountBlock = ({
+  account,
+  onSelect,
+}: {
+  account: Account;
+  onSelect: (account: Account) => void;
+}) => {
+  return (
+    <Box>
+      <Button
+        sx={{ width: '100%', color: 'white' }}
+        onClick={() => onSelect(account)}
+      >
+        {account.userName}
+      </Button>
+      <Divider sx={{ color: 'white' }} />
+    </Box>
+  );
+};
 
 export const AccountSidebar = ({
   accounts,
   onSelect,
 }: {
   accounts: Account[];
-  onSelect: (accont: Account) => void;
+  onSelect: (account: Account) => void;
 }) => {
   return (
     <Box
       sx={{
-        width: '30%',
         backgroundColor: 'black',
         border: '1px white solid',
       }}
     >
+      <Header label="Accounts" />
       <List>
-        {accounts.map((account) => (
-          <ListItem key={account.id} disablePadding>
-            <ListItemButton onClick={() => onSelect(account)}>
-              <ListItemText
-                disableTypography
-                primary={account.userName}
-                sx={{ fontSize: '2rem' }}
-              />
-            </ListItemButton>
-          </ListItem>
-        ))}
+        {accounts.map((account) => {
+          return (
+            <AccountBlock
+              key={account.id}
+              account={account}
+              onSelect={onSelect}
+            />
+          );
+        })}
       </List>
     </Box>
   );
