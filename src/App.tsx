@@ -4,6 +4,8 @@ import { v4 as uuid } from 'uuid';
 import { AccountSidebar, ItemDisplay, Navbar } from '@/components';
 import { Account, Item } from '@/types/account';
 
+const addItemList = ['item1', 'item2', 'item3', 'item4', 'item5'];
+
 const a1: Account = {
   id: uuid(),
   userName: 'john',
@@ -22,6 +24,15 @@ const a3: Account = {
   items: [{ id: uuid(), name: 'orange peel' }],
 };
 
+const randomItems = (quantity: number): Item[] => {
+  const items: Item[] = [];
+  for (let i = 0; i < quantity; i++) {
+    const item: Item = { id: uuid(), name: 'Item ' + i };
+    items.push(item);
+  }
+  return items;
+};
+
 export const App = () => {
   const [accounts, setAccounts] = useState<Account[]>([a1, a2, a3]);
   const [selectedAccount, setSelectedAccount] = useState<Account | undefined>();
@@ -30,16 +41,7 @@ export const App = () => {
     setSelectedAccount(account);
   };
 
-  const randomItems = (quantity: number): Item[] => {
-    const items: Item[] = [];
-    for (let i = 0; i < quantity; i++) {
-      const item: Item = { id: uuid(), name: 'Item ' + i };
-      items.push(item);
-    }
-    return items;
-  };
-
-  const addRandomAccounts = (quantity: number) => {
+  const addRandomAccounts = () => {
     const account: Account = {
       id: uuid(),
       userName: 'Account' + accounts.length,
@@ -48,23 +50,43 @@ export const App = () => {
     setAccounts((prev) => [...prev, account]);
   };
 
+  const addItemToItemList = (itemName: string) => {
+    const item: Item = {
+      id: uuid(),
+      name: itemName,
+    };
+
+    for (const a in accounts) {
+      if (accounts[a].userName === selectedAccount?.userName) {
+        accounts[a].items.push(item);
+        setAccounts((accounts) => [...accounts]);
+        break;
+      }
+    }
+  };
+
   return (
     <Box>
       <Navbar />
       <Button
         variant="contained"
         sx={{ width: '100%' }}
-        onClick={() => addRandomAccounts(10)}
+        onClick={() => addRandomAccounts()}
       >
         ADD RANDOM ACCOUNTS
       </Button>
-
       <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 5fr' }}>
         <Box sx={{ border: '1px white solid' }}>
           <AccountSidebar accounts={accounts} onSelect={handleSelected} />
         </Box>
         <Box sx={{ border: '1px pink solid' }}>
-          <ItemDisplay items={selectedAccount?.items} />
+          {selectedAccount && (
+            <ItemDisplay
+              items={selectedAccount?.items}
+              addItemsList={addItemList}
+              addItemToItemList={addItemToItemList}
+            />
+          )}
         </Box>
       </Box>
     </Box>

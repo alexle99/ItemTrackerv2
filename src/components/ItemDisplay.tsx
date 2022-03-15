@@ -9,6 +9,7 @@ import {
   Select,
   SelectChangeEvent,
 } from '@mui/material';
+import { v4 as uuid } from 'uuid';
 import { Item } from '@/types/account';
 import { Header } from './Header';
 
@@ -29,13 +30,53 @@ const ItemBlock = (props: { item: Item }) => {
   );
 };
 
-export const ItemDisplay = ({ items = [] }: { items?: Item[] }) => {
-  const [currentItem, setCurrentItem] = useState('');
-  const addItem = 'addItem';
+const AddItemDropDown = ({
+  addItemList,
+  handleChange,
+}: {
+  addItemList: string[];
+  handleChange: (event: SelectChangeEvent) => void;
+}) => {
+  return (
+    <FormControl
+      sx={{
+        color: 'white',
+        border: '2px pink solid',
+        width: 'fit-content',
+        display: 'inline-block',
+      }}
+    >
+      <Select
+        sx={{ color: 'white' }}
+        label="Item"
+        onChange={handleChange}
+        value="addItem"
+      >
+        <MenuItem value="addItem">Add Item</MenuItem>
+        {addItemList.map((addItem) => {
+          return (
+            <MenuItem key={addItem} value={addItem}>
+              {addItem}
+            </MenuItem>
+          );
+        })}
+      </Select>
+    </FormControl>
+  );
+};
 
-  const handleChange = (event: SelectChangeEvent) => {
+export const ItemDisplay = ({
+  items = [],
+  addItemsList,
+  addItemToItemList,
+}: {
+  items?: Item[];
+  addItemsList: string[];
+  addItemToItemList: (itemName: string) => void;
+}) => {
+  const handleAddItemClick = (event: SelectChangeEvent) => {
     console.log(event.target.value);
-    setCurrentItem(event.target.value);
+    addItemToItemList(event.target.value);
   };
 
   return (
@@ -43,37 +84,19 @@ export const ItemDisplay = ({ items = [] }: { items?: Item[] }) => {
       <Box>
         <Box
           sx={{
-            // display: 'grid',
-            // gridTemplateColumns: '8fr 1fr',
+            display: 'flex',
+            flexDirection: 'row',
             color: 'white',
           }}
         >
           <Header label="Inventory" />
-          <FormControl
-            sx={{
-              color: 'white',
-              border: '2px pink solid',
-              width: 'fit-content',
-              display: 'inline-block',
-            }}
-          >
-            {/* <InputLabel>Item</InputLabel> */}
-            <Select
-              sx={{ color: 'white' }}
-              label="Item"
-              onChange={handleChange}
-              value="addItem"
-            >
-              <MenuItem value="addItem">Add Item</MenuItem>
-              <MenuItem value="item1">item1</MenuItem>
-              <MenuItem value="item2">item2</MenuItem>
-              <MenuItem value="item3">item3</MenuItem>
-              <MenuItem value="item4">item4</MenuItem>
-            </Select>
-          </FormControl>
+          <AddItemDropDown
+            addItemList={addItemsList}
+            handleChange={handleAddItemClick}
+          />
         </Box>
       </Box>
-      <Grid container sx={{ border: '1px white solid' }}>
+      <Grid container>
         {items.map((item) => {
           return <ItemBlock key={item.id} item={item} />;
         })}
