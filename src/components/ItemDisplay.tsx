@@ -13,7 +13,13 @@ import { v4 as uuid } from 'uuid';
 import { Item } from '@/types/account';
 import { Header } from './Header';
 
-const ItemBlock = (props: { item: Item }) => {
+const ItemBlock = ({
+  item,
+  removeItemFromItemList,
+}: {
+  item: Item;
+  removeItemFromItemList: (item: Item) => void;
+}) => {
   return (
     <Grid
       item
@@ -21,10 +27,16 @@ const ItemBlock = (props: { item: Item }) => {
       sx={{ border: '1px white solid', justifyContent: 'center' }}
     >
       <Button
-        sx={{ border: '1px white solid', width: '100%', color: 'white' }}
+        sx={{
+          border: '1px white solid',
+          width: '100%',
+          color: 'white',
+          '&:hover': { backgroundColor: 'red' },
+        }}
         variant="outlined"
+        onClick={() => removeItemFromItemList(item)}
       >
-        {props.item.name}
+        {item.name}
       </Button>
     </Grid>
   );
@@ -69,10 +81,12 @@ export const ItemDisplay = ({
   items = [],
   addItemsList,
   addItemToItemList,
+  removeItemFromItemList,
 }: {
   items?: Item[];
   addItemsList: string[];
   addItemToItemList: (itemName: string) => void;
+  removeItemFromItemList: (item: Item) => void;
 }) => {
   const handleAddItemClick = (event: SelectChangeEvent) => {
     console.log(event.target.value);
@@ -98,7 +112,13 @@ export const ItemDisplay = ({
       </Box>
       <Grid container>
         {items.map((item) => {
-          return <ItemBlock key={item.id} item={item} />;
+          return (
+            <ItemBlock
+              key={item.id}
+              item={item}
+              removeItemFromItemList={removeItemFromItemList}
+            />
+          );
         })}
       </Grid>
     </Box>

@@ -55,12 +55,23 @@ export const App = () => {
       id: uuid(),
       name: itemName,
     };
-
     for (const a in accounts) {
       if (accounts[a].userName === selectedAccount?.userName) {
         accounts[a].items.push(item);
-        setAccounts((accounts) => [...accounts]);
+        setAccounts(() => [...accounts]);
         break;
+      }
+    }
+  };
+
+  const removeItemFromItemList = (itemToRemove: Item) => {
+    for (const a in accounts) {
+      if (accounts[a].userName === selectedAccount?.userName) {
+        accounts[a].items = accounts[a].items.filter((item) => {
+          return item !== itemToRemove;
+        });
+        setAccounts(() => [...accounts]);
+        return;
       }
     }
   };
@@ -85,6 +96,7 @@ export const App = () => {
               items={selectedAccount?.items}
               addItemsList={addItemList}
               addItemToItemList={addItemToItemList}
+              removeItemFromItemList={removeItemFromItemList}
             />
           )}
         </Box>
