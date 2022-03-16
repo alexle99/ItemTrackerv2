@@ -1,4 +1,5 @@
 {
+  "homepage": "https://alexle99.github.io/ItemTrackerv2",
   "private": true,
   "browserslist": [
     "> 1%",
@@ -6,6 +7,8 @@
     "not dead"
   ],
   "scripts": {
+    "predeploy":"npm run build",
+    "deploy":"gh-pages -d build",
     "dev": "vite",
     "build": "tsc && vite build",
     "start": "vite preview",
@@ -39,6 +42,7 @@
     "eslint-plugin-import": "latest",
     "eslint-plugin-react": "latest",
     "eslint-plugin-react-hooks": "latest",
+    "gh-pages": "^3.2.3",
     "prettier": "latest",
     "typescript": "latest",
     "vite": "latest"
