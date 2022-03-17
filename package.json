@@ -10,7 +10,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "dev": "vite",
-    "build": "vite build",
+    "build": "tsc && vite build",
     "start": "vite preview",
     "preview": "vite preview",
     "lint": "eslint src --ext .js,.ts,.jsx,.tsx"
