@@ -18,11 +18,12 @@
   "dependencies": {
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
-    "@fontsource/roboto": "^4.5.3ow to",
+    "@fontsource/roboto": "^4.5.3",
     "@mui/icons-material": "^5.5.0",
     "@mui/material": "^5.5.0",
     "axios": "latest",
     "dayjs": "latest",
+    "netlify-cli": "^9.13.3",
     "react": "latest",
     "react-dom": "latest",
     "type-fest": "latest",
