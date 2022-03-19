@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Box, Button, Grid } from '@mui/material';
+import { Integer } from 'type-fest';
 import { v4 as uuid } from 'uuid';
-import { AccountSidebar, ItemDisplay, Navbar } from '@/components';
+import { AccountSidebar, ItemDisplay, Navbar, SaveState } from '@/components';
 import { Account, Item } from '@/types/account';
 
 const initialAddFruits = [
@@ -63,6 +64,7 @@ export const App = () => {
     createAccounts(actualAccounts)
   );
   const [selectedAccount, setSelectedAccount] = useState<Account | undefined>();
+  const [counter, setCounter] = useState<number>(0);
   const handleSelected = (account: Account) => {
     setSelectedAccount(account);
   };
@@ -79,6 +81,7 @@ export const App = () => {
       }
     }
   };
+
   const removeItemFromItemList = (itemToRemove: Item) => {
     for (const a in accounts) {
       if (accounts[a].userName === selectedAccount?.userName) {
@@ -90,12 +93,34 @@ export const App = () => {
       }
     }
   };
+
+  const handleSave = () => {
+    localStorage.setItem('accounts', JSON.stringify(accounts));
+  };
+
+  const handleLoad = () => {
+    const object: string | null = localStorage.getItem('accounts');
+    if (object === null) {
+      console.log('NO SAVED DATA');
+    } else {
+      const objectParse = JSON.parse(object);
+      console.table(objectParse);
+      console.log(objectParse);
+      setAccounts(objectParse);
+    }
+  };
+
   return (
     <Box>
       <Navbar />
+      <SaveState handleSave={handleSave} handleLoad={handleLoad} />
       <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 5fr' }}>
         <Box sx={{ border: '1px white solid' }}>
-          <AccountSidebar accounts={accounts} onSelect={handleSelected} />
+          <AccountSidebar
+            accounts={accounts}
+            onSelect={handleSelected}
+            currentSelected={selectedAccount}
+          />
         </Box>
         <Box sx={{ border: '3px white solid' }}>
           {selectedAccount && (

@@ -13,14 +13,21 @@ import { Header } from './Header';
 const AccountBlock = ({
   account,
   onSelect,
+  selected,
 }: {
   account: Account;
   onSelect: (account: Account) => void;
+  selected: boolean;
 }) => {
   return (
     <Box>
       <Button
-        sx={{ fontSize: '1.5em', width: '100%', color: 'white' }}
+        sx={{
+          fontSize: '1.5em',
+          width: '100%',
+          color: 'white',
+          backgroundColor: selected ? 'gray' : 'black',
+        }}
         onClick={() => onSelect(account)}
       >
         {account.userName}
@@ -33,9 +40,11 @@ const AccountBlock = ({
 export const AccountSidebar = ({
   accounts,
   onSelect,
+  currentSelected,
 }: {
   accounts: Account[];
   onSelect: (account: Account) => void;
+  currentSelected: Account | undefined;
 }) => {
   return (
     <Box
@@ -52,6 +61,7 @@ export const AccountSidebar = ({
               key={account.id}
               account={account}
               onSelect={onSelect}
+              selected={currentSelected === account}
             />
           );
         })}
