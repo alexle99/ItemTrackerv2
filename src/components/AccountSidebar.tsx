@@ -20,7 +20,7 @@ const AccountBlock = ({
   return (
     <Box>
       <Button
-        sx={{ width: '100%', color: 'white' }}
+        sx={{ fontSize: '1.5em', width: '100%', color: 'white' }}
         onClick={() => onSelect(account)}
       >
         {account.userName}

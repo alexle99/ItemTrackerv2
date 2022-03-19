@@ -9,7 +9,7 @@ export const Header = ({ label }: { label: string }) => {
         justifyContent: 'center',
         alignContent: 'center',
         fontSize: 25,
-        borderBottom: '1px green solid',
+        borderBottom: '3px white solid',
         padding: '2rem',
         width: '100%',
       }}

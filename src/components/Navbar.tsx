@@ -6,7 +6,6 @@ export const Navbar = () => {
       <AppBar
         position="static"
         sx={{
-          marginBottom: '2%',
           alignItems: 'center',
           backgroundColor: 'black',
           borderBottom: '2px white solid',

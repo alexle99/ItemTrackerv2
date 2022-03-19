@@ -31,6 +31,7 @@ const ItemBlock = ({
           border: '1px white solid',
           width: '100%',
           color: 'white',
+          fontSize: '1.5em',
           '&:hover': { backgroundColor: 'red' },
         }}
         variant="outlined"
@@ -43,48 +44,62 @@ const ItemBlock = ({
 };
 
 const AddItemDropDown = ({
+  label,
   addItemList,
   handleChange,
 }: {
+  label: string;
   addItemList: string[];
   handleChange: (event: SelectChangeEvent) => void;
 }) => {
   return (
-    <FormControl
+    <Box
       sx={{
         color: 'white',
-        border: '2px pink solid',
+        border: '2px white solid',
         width: 'fit-content',
-        display: 'inline-block',
+        display: 'flex',
+        justifyContent: 'center',
+        alignContent: 'center',
       }}
     >
       <Select
-        sx={{ color: 'white' }}
+        sx={{
+          color: 'white',
+          width: 'fit-content',
+        }}
         label="Item"
         onChange={handleChange}
         value="addItem"
       >
-        <MenuItem value="addItem">Add Item</MenuItem>
+        <MenuItem
+          sx={{ fontSize: '1.4em', border: '2px green solid' }}
+          value="addItem"
+        >
+          <em>{label}</em>
+        </MenuItem>
         {addItemList.map((addItem) => {
           return (
-            <MenuItem key={addItem} value={addItem}>
+            <MenuItem key={addItem} value={addItem} sx={{ fontSize: '1.4em' }}>
               {addItem}
             </MenuItem>
           );
         })}
       </Select>
-    </FormControl>
+    </Box>
   );
 };
 
 export const ItemDisplay = ({
   items = [],
   addItemsList,
+  addFruitsList,
   addItemToItemList,
   removeItemFromItemList,
 }: {
   items?: Item[];
   addItemsList: string[];
+  addFruitsList: string[];
   addItemToItemList: (itemName: string) => void;
   removeItemFromItemList: (item: Item) => void;
 }) => {
@@ -105,7 +120,13 @@ export const ItemDisplay = ({
         >
           <Header label="Inventory" />
           <AddItemDropDown
+            label="Add Item"
             addItemList={addItemsList}
+            handleChange={handleAddItemClick}
+          />
+          <AddItemDropDown
+            label="Add Fruit"
+            addItemList={addFruitsList}
             handleChange={handleAddItemClick}
           />
         </Box>
