@@ -1,15 +1,6 @@
-import { useState } from 'react';
-import {
-  Box,
-  Button,
-  FormControl,
-  Grid,
-  InputLabel,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
-} from '@mui/material';
+import { Box, Button, Grid } from '@mui/material';
 import { Item } from '@/types/account';
+import { AddItemDropDown } from './AddItemDropdown';
 import { Header } from './Header';
 
 const ItemBlock = ({
@@ -42,53 +33,6 @@ const ItemBlock = ({
   );
 };
 
-const AddItemDropDown = ({
-  label,
-  addItemList,
-  handleChange,
-}: {
-  label: string;
-  addItemList: string[];
-  handleChange: (event: SelectChangeEvent) => void;
-}) => {
-  return (
-    <Box
-      sx={{
-        color: 'white',
-        border: '2px white solid',
-        width: 'fit-content',
-        display: 'flex',
-        justifyContent: 'center',
-        alignContent: 'center',
-      }}
-    >
-      <Select
-        sx={{
-          color: 'white',
-          width: 'fit-content',
-        }}
-        label="Item"
-        onChange={handleChange}
-        value="addItem"
-      >
-        <MenuItem
-          sx={{ fontSize: '1.4em', border: '2px green solid' }}
-          value="addItem"
-        >
-          <em>{label}</em>
-        </MenuItem>
-        {addItemList.map((addItem) => {
-          return (
-            <MenuItem key={addItem} value={addItem} sx={{ fontSize: '1.4em' }}>
-              {addItem}
-            </MenuItem>
-          );
-        })}
-      </Select>
-    </Box>
-  );
-};
-
 export const ItemDisplay = ({
   items = [],
   addItemsList,
@@ -102,9 +46,9 @@ export const ItemDisplay = ({
   addItemToItemList: (itemName: string) => void;
   removeItemFromItemList: (item: Item) => void;
 }) => {
-  const handleAddItemClick = (event: SelectChangeEvent) => {
-    console.log(event.target.value);
-    addItemToItemList(event.target.value);
+  const handleAddItemClick = (item: string) => {
+    console.log(item);
+    addItemToItemList(item);
   };
 
   return (

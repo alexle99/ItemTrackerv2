@@ -1,12 +1,4 @@
-import {
-  Box,
-  Button,
-  Divider,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-} from '@mui/material';
+import { Box, Button, Divider, List } from '@mui/material';
 import { Account } from '@/types/account';
 import { Header } from './Header';
 
@@ -26,8 +18,12 @@ const AccountBlock = ({
           fontSize: '1.5em',
           width: '100%',
           color: 'white',
-          backgroundColor: selected ? 'gray' : 'black',
+          backgroundColor: selected ? '#383838' : 'black',
+          '&:hover': {
+            backgroundColor: 'gray',
+          },
         }}
+        disableRipple
         onClick={() => onSelect(account)}
       >
         {account.userName}

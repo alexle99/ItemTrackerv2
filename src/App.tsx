@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Box, Button, Grid } from '@mui/material';
 import { Integer } from 'type-fest';
 import { v4 as uuid } from 'uuid';
@@ -64,7 +64,12 @@ export const App = () => {
     createAccounts(actualAccounts)
   );
   const [selectedAccount, setSelectedAccount] = useState<Account | undefined>();
-  const [counter, setCounter] = useState<number>(0);
+  const [savedState, setSavedState] = useState(false);
+
+  useEffect(() => {
+    setSavedState(false);
+  }, [accounts]);
+
   const handleSelected = (account: Account) => {
     setSelectedAccount(account);
   };
@@ -96,6 +101,7 @@ export const App = () => {
 
   const handleSave = () => {
     localStorage.setItem('accounts', JSON.stringify(accounts));
+    setSavedState(true);
   };
 
   const handleLoad = () => {
@@ -113,7 +119,11 @@ export const App = () => {
   return (
     <Box>
       <Navbar />
-      <SaveState handleSave={handleSave} handleLoad={handleLoad} />
+      <SaveState
+        handleSave={handleSave}
+        handleLoad={handleLoad}
+        savedState={savedState}
+      />
       <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 5fr' }}>
         <Box sx={{ border: '1px white solid' }}>
           <AccountSidebar
