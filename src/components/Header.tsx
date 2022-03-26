@@ -1,20 +1,22 @@
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
+import COLORS from '@/colors';
 
 export const Header = ({ label }: { label: string }) => {
   return (
     <Box
       sx={{
-        color: 'White',
         display: 'flex',
         justifyContent: 'center',
         alignContent: 'center',
-        fontSize: 25,
-        borderBottom: '3px white solid',
+
         padding: '2rem',
         width: '100%',
+        backgroundColor: COLORS.headerBackground,
       }}
     >
-      {label}
+      <Typography variant="h4" sx={{ color: COLORS.headerColor }}>
+        {label}
+      </Typography>
     </Box>
   );
 };

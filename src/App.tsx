@@ -1,11 +1,16 @@
 import { useEffect, useState } from 'react';
-import { Box, Button, Grid } from '@mui/material';
-import { Integer } from 'type-fest';
+import { Box } from '@mui/material';
 import { v4 as uuid } from 'uuid';
-import { AccountSidebar, ItemDisplay, Navbar, SaveState } from '@/components';
+import {
+  AccountSidebar,
+  Header,
+  ItemDisplay,
+  Navbar,
+  SaveState,
+} from '@/components';
 import { Account, Item } from '@/types/account';
 
-const initialAddFruits = [
+const initialAddItems = [
   'Mochi',
   'Tori',
   'Pika',
@@ -18,7 +23,7 @@ const initialAddFruits = [
   'Gura',
   'Zushi',
 ];
-const initialAddItems = [
+const initialAddFruits = [
   'Pbag',
   'Jester Outfit',
   'Cupid Queen Outfit',
@@ -31,6 +36,8 @@ const initialAddItems = [
   'Coffin',
   'Hover',
 ];
+
+const itemList = [initialAddItems, initialAddFruits];
 
 const actualAccounts = [
   'HAHAFAILUREJL',
@@ -118,30 +125,27 @@ export const App = () => {
 
   return (
     <Box>
-      <Navbar />
-      <SaveState
+      <Navbar
         handleSave={handleSave}
         handleLoad={handleLoad}
         savedState={savedState}
       />
       <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 5fr' }}>
-        <Box sx={{ border: '1px white solid' }}>
+        <Box>
           <AccountSidebar
             accounts={accounts}
             onSelect={handleSelected}
             currentSelected={selectedAccount}
           />
         </Box>
-        <Box sx={{ border: '3px white solid' }}>
-          {selectedAccount && (
-            <ItemDisplay
-              items={selectedAccount?.items}
-              addItemsList={initialAddItems}
-              addFruitsList={initialAddFruits}
-              addItemToItemList={addItemToItemList}
-              removeItemFromItemList={removeItemFromItemList}
-            />
-          )}
+        <Box>
+          <ItemDisplay
+            items={selectedAccount?.items}
+            addItemsList={itemList}
+            addItemToItemList={addItemToItemList}
+            removeItemFromItemList={removeItemFromItemList}
+            selectedAccount={selectedAccount}
+          />
         </Box>
       </Box>
     </Box>

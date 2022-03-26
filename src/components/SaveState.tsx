@@ -1,4 +1,5 @@
 import { Box, Button } from '@mui/material';
+import COLORS from '@/colors';
 
 const StateButton = ({
   label,
@@ -11,15 +12,13 @@ const StateButton = ({
 }) => {
   return (
     <Button
+      variant="outlined"
       sx={{
-        width: '30%',
-        color: 'white',
-        backgroundColor: savedState ? 'black' : '#383838',
-        border: '2px white solid',
+        width: 'auto',
+        color: COLORS.buttonText,
+        backgroundColor: savedState ? '#1a1a1a' : COLORS.buttonColor,
         fontSize: '1.2em',
-        '&:hover': {
-          backgroundColor: 'gray',
-        },
+        marginLeft: '20px',
       }}
       onClick={() => {
         handleFunction();
@@ -43,8 +42,9 @@ export const SaveState = ({
     <Box
       sx={{
         display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'center',
+        alignItems: 'center',
+        space: '6px',
+        marginRight: '10px',
       }}
     >
       <StateButton
