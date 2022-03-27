@@ -57,7 +57,7 @@ export const ItemDisplay = ({
           sx={{
             display: 'flex',
             flexDirection: 'row',
-            color: 'white',
+            alignItems: 'center',
           }}
         >
           <Header label="Inventory" />

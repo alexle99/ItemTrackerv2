@@ -17,7 +17,7 @@ const StateButton = ({
         width: 'auto',
         color: COLORS.buttonText,
         backgroundColor: savedState ? '#1a1a1a' : COLORS.buttonColor,
-        fontSize: '1.2em',
+        fontSize: '1.4em',
         marginLeft: '20px',
       }}
       onClick={() => {

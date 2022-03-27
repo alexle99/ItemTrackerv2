@@ -8,13 +8,15 @@ export const Header = ({ label }: { label: string }) => {
         display: 'flex',
         justifyContent: 'center',
         alignContent: 'center',
-
         padding: '2rem',
         width: '100%',
         backgroundColor: COLORS.headerBackground,
       }}
     >
-      <Typography variant="h4" sx={{ color: COLORS.headerColor }}>
+      <Typography
+        variant="h4"
+        sx={{ color: COLORS.headerColor, position: 'relative' }}
+      >
         {label}
       </Typography>
     </Box>

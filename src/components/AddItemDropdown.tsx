@@ -109,8 +109,9 @@ export const AddItemDropDown = ({
         backgroundColor: COLORS.headerBackground,
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center',
-        padding: '20px',
+        position: 'absolute',
+        right: '0',
+        margin: '20px',
       }}
     >
       <AddItemButton label={label} handleClick={handleClick} />

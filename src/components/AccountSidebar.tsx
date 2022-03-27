@@ -1,4 +1,4 @@
-import { Box, Button, Divider, List } from '@mui/material';
+import { Box, Button, Divider } from '@mui/material';
 import COLORS from '@/colors';
 import { Account } from '@/types/account';
 import { Header } from './Header';
