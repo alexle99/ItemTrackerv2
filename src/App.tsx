@@ -10,7 +10,8 @@ import {
 } from '@/components';
 import { Account, Item } from '@/types/account';
 
-const initialAddItems = [
+const Fruits = [
+  'Fruits',
   'Mochi',
   'Tori',
   'Pika',
@@ -23,21 +24,69 @@ const initialAddItems = [
   'Gura',
   'Zushi',
 ];
-const initialAddFruits = [
-  'Pbag',
-  'Jester Outfit',
-  'Cupid Queen Outfit',
-  'Flowers',
-  'Elo Hammer',
-  'Drums',
-  'Croc Cape',
-  'Both cores',
-  'Striker',
-  'Coffin',
-  'Hover',
+
+const Unobtainables = [
+  'Unobtainables',
+  'candy cane',
+  'prestige bag',
+  'jester outfit',
+  'jester scythe',
+  'baal head',
+  'fang',
+  'flowers',
+  'elo hammer',
+  'elo egg',
+  'elo other eggs',
+  'santa bells',
+  'santa hat',
+  'elf hat',
+  'cupid queen outfit',
+  'other cupid drops',
+  'gift of lancer',
+  'festival lancer',
+  'festival shield',
 ];
 
-const itemList = [initialAddItems, initialAddFruits];
+const Boats = ['Boats', 'striker', 'coffin', 'hover', 'flamingo boat'];
+
+const KrakenStuff = [
+  'Kraken Stuff',
+  'both cores',
+  'kraken core',
+  'sb core',
+  'red kraken set',
+  'gold kraken set',
+  'green kraken set',
+  'blue kraken set',
+  'purple kraken set',
+  'azure kk armor',
+  'azure kk gs',
+  'azure cape',
+  'azure katana',
+];
+
+const Other = [
+  'other',
+  'drums',
+  'croc cape',
+  'wb cape',
+  'marine cape',
+  'gravito blade',
+  'trident',
+  'bisento',
+  'cutlass',
+  'kiribachi',
+  'cho crown',
+  'pole',
+  'golden hook',
+  'neptune crown',
+  'musashi set',
+  'musashi hat',
+  'karuta',
+  'spare fruit bag',
+];
+
+const itemList = [Fruits, Unobtainables, Boats, KrakenStuff, Other];
 
 const actualAccounts = [
   'HAHAFAILUREJL',

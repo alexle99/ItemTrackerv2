@@ -50,35 +50,25 @@ const MenuList = ({
       onClose={handleClose}
       sx={{ height: '75vh' }}
     >
-      <MenuItem disabled sx={{ fontSize: '1.4em', fontStyle: 'italic' }}>
-        Fruits
-      </MenuItem>
-      {addItemList[0].map((addItem) => {
+      {addItemList.map((itemList) => {
         return (
-          <MenuItem
-            key={addItem}
-            value={addItem}
-            sx={{ fontSize: '1.4em' }}
-            onClick={() => handleChange(addItem)}
-          >
-            {addItem}
-          </MenuItem>
-        );
-      })}
-      <Divider />
-      <MenuItem disabled sx={{ fontSize: '1.4em', fontStyle: 'italic' }}>
-        Items
-      </MenuItem>
-      {addItemList[1].map((addItem) => {
-        return (
-          <MenuItem
-            key={addItem}
-            value={addItem}
-            sx={{ fontSize: '1.4em' }}
-            onClick={() => handleChange(addItem)}
-          >
-            {addItem}
-          </MenuItem>
+          <div key={itemList[0]}>
+            <MenuItem disabled sx={{ fontSize: '1.4em', fontStyle: 'italic' }}>
+              {itemList[0]}
+            </MenuItem>
+            {itemList.slice(1).map((item) => {
+              return (
+                <MenuItem
+                  key={item}
+                  value={item}
+                  sx={{ fontSize: '1.4em' }}
+                  onClick={() => handleChange(item)}
+                >
+                  {item}
+                </MenuItem>
+              );
+            })}
+          </div>
         );
       })}
     </Menu>

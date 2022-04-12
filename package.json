@@ -23,7 +23,7 @@
     "@mui/material": "^5.5.0",
     "axios": "latest",
     "dayjs": "latest",
-    "netlify-cli": "^9.13.3",
+    "netlify-cli": "^9.16.6",
     "react": "latest",
     "react-dom": "latest",
     "type-fest": "latest",
