@@ -13,13 +13,24 @@ const AccountBlock = ({
   selected: boolean;
 }) => {
   return (
-    <Box sx={{ backgroundColor: COLORS.accountBackground }}>
+    <Box
+      sx={{
+        backgroundColor: COLORS.accountSidebarBackground,
+        padding: '.5rem',
+        paddingBottom: '0',
+      }}
+    >
       <Button
         sx={{
           fontSize: '1.5em',
           width: '100%',
           color: 'white',
-          backgroundColor: selected ? '#383838' : COLORS.accountBackground,
+          backgroundColor: selected
+            ? COLORS.accountSelected
+            : COLORS.accountButtonColor,
+          '&:hover': {
+            backgroundColor: COLORS.inventoryBackground,
+          },
         }}
         disableRipple
         onClick={() => onSelect(account)}
@@ -42,7 +53,7 @@ export const AccountSidebar = ({
 }) => {
   return (
     <Box>
-      <Header label="Accounts" />
+      <Header label="Accounts" color={COLORS.accountSidebarBackground} />
       <Box>
         {accounts.map((account) => {
           return (

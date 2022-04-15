@@ -1,7 +1,7 @@
 import { Box, Typography } from '@mui/material';
 import COLORS from '@/colors';
 
-export const Header = ({ label }: { label: string }) => {
+export const Header = ({ label, color }: { label: string; color: string }) => {
   return (
     <Box
       sx={{
@@ -10,7 +10,8 @@ export const Header = ({ label }: { label: string }) => {
         alignContent: 'center',
         padding: '2rem',
         width: '100%',
-        backgroundColor: COLORS.headerBackground,
+        backgroundColor: color,
+        borderBottom: `2px #161616 solid`,
       }}
     >
       <Typography

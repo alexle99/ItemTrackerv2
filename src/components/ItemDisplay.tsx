@@ -1,4 +1,5 @@
 import { Box, Button, Grid } from '@mui/material';
+import COLORS from '@/colors';
 import { Account, Item } from '@/types/account';
 import { AddItemDropDown } from './AddItemDropdown';
 import { Header } from './Header';
@@ -14,13 +15,14 @@ const ItemBlock = ({
     <Grid
       item
       xs={3}
-      sx={{ border: '1px white solid', justifyContent: 'center' }}
+      sx={{ padding: '.5rem', paddingBottom: 0, paddingLeft: 0 }}
     >
       <Button
         sx={{
           width: '100%',
           color: 'white',
           fontSize: '1.5em',
+          backgroundColor: COLORS.itemButtonColor,
           '&:hover': { backgroundColor: 'red' },
         }}
         variant="outlined"
@@ -51,7 +53,7 @@ export const ItemDisplay = ({
   };
 
   return (
-    <Box>
+    <Box sx={{ backgroundColor: COLORS.inventoryBackground }}>
       <Box>
         <Box
           sx={{
@@ -60,7 +62,7 @@ export const ItemDisplay = ({
             alignItems: 'center',
           }}
         >
-          <Header label="Inventory" />
+          <Header label="Inventory" color={COLORS.inventoryBackground} />
           {selectedAccount && (
             <AddItemDropDown
               label="Add Item"
@@ -70,7 +72,7 @@ export const ItemDisplay = ({
           )}
         </Box>
       </Box>
-      <Grid container>
+      <Grid container sx={{ paddingLeft: '.5rem' }}>
         {items.map((item) => {
           return (
             <ItemBlock

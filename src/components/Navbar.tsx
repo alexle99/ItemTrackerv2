@@ -22,6 +22,7 @@ export const Navbar = ({
         flexDirection: 'row',
         justifyContent: 'space-between',
         backgroundColor: COLORS.navbarBackground,
+        color: COLORS.primaryText,
         padding: '.5%',
       }}
     >

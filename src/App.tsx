@@ -129,6 +129,7 @@ export const App = () => {
   const handleSelected = (account: Account) => {
     setSelectedAccount(account);
   };
+
   const addItemToItemList = (itemName: string) => {
     const item: Item = {
       id: uuid(),
@@ -180,22 +181,18 @@ export const App = () => {
         savedState={savedState}
       />
       <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 5fr' }}>
-        <Box>
-          <AccountSidebar
-            accounts={accounts}
-            onSelect={handleSelected}
-            currentSelected={selectedAccount}
-          />
-        </Box>
-        <Box>
-          <ItemDisplay
-            items={selectedAccount?.items}
-            addItemsList={itemList}
-            addItemToItemList={addItemToItemList}
-            removeItemFromItemList={removeItemFromItemList}
-            selectedAccount={selectedAccount}
-          />
-        </Box>
+        <AccountSidebar
+          accounts={accounts}
+          onSelect={handleSelected}
+          currentSelected={selectedAccount}
+        />
+        <ItemDisplay
+          items={selectedAccount?.items}
+          addItemsList={itemList}
+          addItemToItemList={addItemToItemList}
+          removeItemFromItemList={removeItemFromItemList}
+          selectedAccount={selectedAccount}
+        />
       </Box>
     </Box>
   );
