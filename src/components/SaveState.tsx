@@ -23,6 +23,7 @@ const StateButton = ({
       onClick={() => {
         handleFunction();
       }}
+      disabled={savedState}
     >
       {label}
     </Button>
@@ -30,13 +31,13 @@ const StateButton = ({
 };
 
 export const SaveState = ({
-  handleSave,
-  handleLoad,
   savedState,
+  toggleSaveDialog,
+  toggleLoadDialog,
 }: {
-  handleSave: () => void;
-  handleLoad: () => void;
   savedState: boolean;
+  toggleSaveDialog: () => void;
+  toggleLoadDialog: () => void;
 }) => {
   return (
     <Box
@@ -49,10 +50,10 @@ export const SaveState = ({
     >
       <StateButton
         label={savedState ? 'saved!' : 'save'}
-        handleFunction={handleSave}
+        handleFunction={toggleSaveDialog}
         savedState={savedState}
       />
-      <StateButton label="load" handleFunction={handleLoad} />
+      <StateButton label="load" handleFunction={toggleLoadDialog} />
     </Box>
   );
 };

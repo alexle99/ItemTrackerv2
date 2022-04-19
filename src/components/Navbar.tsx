@@ -5,13 +5,13 @@ import COLORS from '@/colors';
 import { SaveState } from './SaveState';
 
 export const Navbar = ({
-  handleSave,
-  handleLoad,
   savedState,
+  toggleSaveDialog,
+  toggleLoadDialog,
 }: {
-  handleSave: () => void;
-  handleLoad: () => void;
   savedState: boolean;
+  toggleSaveDialog: () => void;
+  toggleLoadDialog: () => void;
 }) => {
   const label = 'Item Tracker';
   return (
@@ -53,9 +53,9 @@ export const Navbar = ({
         </Typography>
       </Box>
       <SaveState
-        handleSave={handleSave}
-        handleLoad={handleLoad}
         savedState={savedState}
+        toggleSaveDialog={toggleSaveDialog}
+        toggleLoadDialog={toggleLoadDialog}
       />
     </AppBar>
   );

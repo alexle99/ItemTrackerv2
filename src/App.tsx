@@ -1,14 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
 import { v4 as uuid } from 'uuid';
-import {
-  AccountSidebar,
-  Header,
-  ItemDisplay,
-  Navbar,
-  SaveState,
-} from '@/components';
+import { AccountSidebar, ItemDisplay, Navbar } from '@/components';
 import { Account, Item } from '@/types/account';
+import { ConfirmationDialog } from './components/ConfirmationDialog';
 
 const Fruits = [
   'Fruits',
@@ -121,6 +116,13 @@ export const App = () => {
   );
   const [selectedAccount, setSelectedAccount] = useState<Account | undefined>();
   const [savedState, setSavedState] = useState(false);
+  const [openSaveDialog, setOpenSaveDialog] = useState(false);
+  const [openLoadDialog, setOpenLoadDialog] = useState(false);
+  // const [action, setAction] = useState({
+  //   text: '',
+  //   open: false,
+  //   actionFunction: () => {},
+  // });
 
   useEffect(() => {
     setSavedState(false);
@@ -173,12 +175,32 @@ export const App = () => {
     }
   };
 
+  const handleToggleSaveDialog = () => {
+    setOpenSaveDialog(!openSaveDialog);
+  };
+
+  const handleToggleLoadDialog = () => {
+    setOpenLoadDialog(!openLoadDialog);
+  };
+
+  // const handleToggleDialog = (action: string) => {
+  //   if (action === 'save') {
+  //     setAction({
+  //       text: 'Save',
+  //       open: true,
+  //       actionFunction: handleSave,
+  //     });
+  //   } else {
+  //     setAction('load');
+  //   }
+  // };
+
   return (
     <Box>
       <Navbar
-        handleSave={handleSave}
-        handleLoad={handleLoad}
         savedState={savedState}
+        toggleSaveDialog={handleToggleSaveDialog}
+        toggleLoadDialog={handleToggleLoadDialog}
       />
       <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 5fr' }}>
         <AccountSidebar
@@ -193,6 +215,24 @@ export const App = () => {
           removeItemFromItemList={removeItemFromItemList}
           selectedAccount={selectedAccount}
         />
+        <ConfirmationDialog
+          titleText="Save"
+          open={openSaveDialog}
+          onClose={handleToggleSaveDialog}
+          onYes={handleSave}
+        />
+        <ConfirmationDialog
+          titleText="Load"
+          open={openLoadDialog}
+          onClose={handleToggleLoadDialog}
+          onYes={handleLoad}
+        />
+        {/* <ConfirmationDialog
+          titleText={action}
+          open={openLoadDialog}
+          onClose={handleToggleLoadDialog}
+          onYes={handleLoad}
+        /> */}
       </Box>
     </Box>
   );
