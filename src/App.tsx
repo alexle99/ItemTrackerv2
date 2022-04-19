@@ -110,19 +110,23 @@ const createAccounts = (accountList: string[]): Account[] => {
   return result;
 };
 
+const dummyFunction = () => {
+  console.log('DUMMY FUNCTION');
+};
+
+const defaultAction = {
+  text: '',
+  open: false,
+  actionFunction: dummyFunction,
+};
+
 export const App = () => {
   const [accounts, setAccounts] = useState<Account[]>(
     createAccounts(actualAccounts)
   );
   const [selectedAccount, setSelectedAccount] = useState<Account | undefined>();
   const [savedState, setSavedState] = useState(false);
-  const [openSaveDialog, setOpenSaveDialog] = useState(false);
-  const [openLoadDialog, setOpenLoadDialog] = useState(false);
-  // const [action, setAction] = useState({
-  //   text: '',
-  //   open: false,
-  //   actionFunction: () => {},
-  // });
+  const [action, setAction] = useState(defaultAction);
 
   useEffect(() => {
     setSavedState(false);
@@ -175,33 +179,31 @@ export const App = () => {
     }
   };
 
-  const handleToggleSaveDialog = () => {
-    setOpenSaveDialog(!openSaveDialog);
+  const saveAction = {
+    text: 'Save',
+    open: true,
+    actionFunction: handleSave,
   };
 
-  const handleToggleLoadDialog = () => {
-    setOpenLoadDialog(!openLoadDialog);
+  const loadAction = {
+    text: 'Load',
+    open: true,
+    actionFunction: handleLoad,
   };
 
-  // const handleToggleDialog = (action: string) => {
-  //   if (action === 'save') {
-  //     setAction({
-  //       text: 'Save',
-  //       open: true,
-  //       actionFunction: handleSave,
-  //     });
-  //   } else {
-  //     setAction('load');
-  //   }
-  // };
+  const handleToggleDialog = (actionText: string) => {
+    if (actionText === 'save') {
+      setAction(saveAction);
+    } else if (actionText === 'load') {
+      setAction(loadAction);
+    } else {
+      setAction(defaultAction);
+    }
+  };
 
   return (
     <Box>
-      <Navbar
-        savedState={savedState}
-        toggleSaveDialog={handleToggleSaveDialog}
-        toggleLoadDialog={handleToggleLoadDialog}
-      />
+      <Navbar savedState={savedState} toggleDialog={handleToggleDialog} />
       <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 5fr' }}>
         <AccountSidebar
           accounts={accounts}
@@ -216,23 +218,11 @@ export const App = () => {
           selectedAccount={selectedAccount}
         />
         <ConfirmationDialog
-          titleText="Save"
-          open={openSaveDialog}
-          onClose={handleToggleSaveDialog}
-          onYes={handleSave}
+          titleText={action.text}
+          open={action.open}
+          onClose={() => handleToggleDialog('')}
+          onYes={action.actionFunction}
         />
-        <ConfirmationDialog
-          titleText="Load"
-          open={openLoadDialog}
-          onClose={handleToggleLoadDialog}
-          onYes={handleLoad}
-        />
-        {/* <ConfirmationDialog
-          titleText={action}
-          open={openLoadDialog}
-          onClose={handleToggleLoadDialog}
-          onYes={handleLoad}
-        /> */}
       </Box>
     </Box>
   );

@@ -19,7 +19,7 @@ const AddItemButton = ({
         backgroundColor: COLORS.buttonColor,
         fontSize: '1.4em',
         '&:hover': {
-          backgroundColor: COLORS.headerBackground,
+          backgroundColor: COLORS.inventoryBackground,
         },
       }}
       disableElevation
@@ -96,7 +96,7 @@ export const AddItemDropDown = ({
   return (
     <Box
       sx={{
-        backgroundColor: COLORS.headerBackground,
+        backgroundColor: COLORS.inventoryBackground,
         display: 'flex',
         justifyContent: 'center',
         position: 'absolute',

@@ -3,11 +3,11 @@ import COLORS from '@/colors';
 
 const StateButton = ({
   label,
-  handleFunction,
+  handleClick,
   savedState,
 }: {
   label: string;
-  handleFunction: () => void;
+  handleClick: (arg0: string) => void;
   savedState?: boolean;
 }) => {
   return (
@@ -21,7 +21,7 @@ const StateButton = ({
         marginLeft: '20px',
       }}
       onClick={() => {
-        handleFunction();
+        handleClick(label);
       }}
       disabled={savedState}
     >
@@ -32,12 +32,10 @@ const StateButton = ({
 
 export const SaveState = ({
   savedState,
-  toggleSaveDialog,
-  toggleLoadDialog,
+  handleClick,
 }: {
   savedState: boolean;
-  toggleSaveDialog: () => void;
-  toggleLoadDialog: () => void;
+  handleClick: (arg0: string) => void;
 }) => {
   return (
     <Box
@@ -50,10 +48,10 @@ export const SaveState = ({
     >
       <StateButton
         label={savedState ? 'saved!' : 'save'}
-        handleFunction={toggleSaveDialog}
+        handleClick={handleClick}
         savedState={savedState}
       />
-      <StateButton label="load" handleFunction={toggleLoadDialog} />
+      <StateButton label="load" handleClick={handleClick} />
     </Box>
   );
 };

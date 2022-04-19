@@ -6,12 +6,10 @@ import { SaveState } from './SaveState';
 
 export const Navbar = ({
   savedState,
-  toggleSaveDialog,
-  toggleLoadDialog,
+  toggleDialog,
 }: {
   savedState: boolean;
-  toggleSaveDialog: () => void;
-  toggleLoadDialog: () => void;
+  toggleDialog: (arg0: string) => void;
 }) => {
   const label = 'Item Tracker';
   return (
@@ -52,11 +50,7 @@ export const Navbar = ({
           {label}
         </Typography>
       </Box>
-      <SaveState
-        savedState={savedState}
-        toggleSaveDialog={toggleSaveDialog}
-        toggleLoadDialog={toggleLoadDialog}
-      />
+      <SaveState savedState={savedState} handleClick={toggleDialog} />
     </AppBar>
   );
 };

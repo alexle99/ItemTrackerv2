@@ -1,4 +1,5 @@
-import { Button, Dialog, DialogTitle } from '@mui/material';
+import { Box, Button, Dialog, DialogTitle } from '@mui/material';
+import COLORS from '@/colors';
 
 export const ConfirmationDialog = ({
   open,
@@ -18,8 +19,24 @@ export const ConfirmationDialog = ({
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogTitle>Are you sure you want to {titleText}?</DialogTitle>
-      <Button onClick={handleYes}>Yes</Button>
-      <Button onClick={onClose}>No</Button>
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Button
+          sx={{
+            width: '10rem',
+            backgroundColor: COLORS.buttonColor,
+            color: COLORS.buttonText,
+          }}
+          onClick={handleYes}
+        >
+          Yes
+        </Button>
+        <Button
+          sx={{ width: '10rem', color: COLORS.buttonText }}
+          onClick={onClose}
+        >
+          No
+        </Button>
+      </Box>
     </Dialog>
   );
 };

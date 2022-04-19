@@ -11,7 +11,7 @@ export const Header = ({ label, color }: { label: string; color: string }) => {
         padding: '2rem',
         width: '100%',
         backgroundColor: color,
-        borderBottom: `2px #161616 solid`,
+        borderBottom: `1px #303030 solid`,
       }}
     >
       <Typography
