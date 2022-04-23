@@ -2,6 +2,7 @@ import { Box, Button, Divider } from '@mui/material';
 import COLORS from '@/colors';
 import { Account } from '@/types/account';
 import { Header } from './Header';
+import { HeaderDivider } from './HeaderDivider';
 
 const AccountBlock = ({
   account,
@@ -37,7 +38,6 @@ const AccountBlock = ({
       >
         {account.userName}
       </Button>
-      <Divider sx={{ color: 'white' }} />
     </Box>
   );
 };

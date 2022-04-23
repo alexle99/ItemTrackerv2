@@ -1,5 +1,13 @@
 import { useState } from 'react';
-import { Box, Button, Divider, Menu, MenuItem } from '@mui/material';
+import {
+  Box,
+  Button,
+  Divider,
+  Menu,
+  MenuItem,
+  Theme,
+  makeStyles,
+} from '@mui/material';
 import COLORS from '@/colors';
 
 const AddItemButton = ({
@@ -49,11 +57,24 @@ const MenuList = ({
       open={open}
       onClose={handleClose}
       sx={{ height: '75vh' }}
+      PaperProps={{
+        style: {
+          color: 'white',
+          backgroundColor: 'black',
+        },
+      }}
     >
       {addItemList.map((itemList) => {
         return (
           <div key={itemList[0]}>
-            <MenuItem disabled sx={{ fontSize: '1.4em', fontStyle: 'italic' }}>
+            <MenuItem
+              disabled
+              sx={{
+                fontSize: '1.4em',
+                fontStyle: 'italic',
+                color: 'white',
+              }}
+            >
               {itemList[0]}
             </MenuItem>
             {itemList.slice(1).map((item) => {
@@ -61,7 +82,10 @@ const MenuList = ({
                 <MenuItem
                   key={item}
                   value={item}
-                  sx={{ fontSize: '1.4em' }}
+                  sx={{
+                    fontSize: '1.4em',
+                    '&:hover': { backgroundColor: 'gray' },
+                  }}
                   onClick={() => handleChange(item)}
                 >
                   {item}

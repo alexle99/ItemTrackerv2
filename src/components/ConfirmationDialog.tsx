@@ -17,8 +17,14 @@ export const ConfirmationDialog = ({
     onClose();
   };
   return (
-    <Dialog open={open} onClose={onClose}>
-      <DialogTitle>Are you sure you want to {titleText}?</DialogTitle>
+    <Dialog
+      open={open}
+      onClose={onClose}
+      PaperProps={{ style: { backgroundColor: 'black' } }}
+    >
+      <DialogTitle sx={{ color: 'white' }}>
+        Are you sure you want to {titleText}?
+      </DialogTitle>
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
         <Button
           sx={{

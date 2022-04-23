@@ -3,6 +3,7 @@ import COLORS from '@/colors';
 import { Account, Item } from '@/types/account';
 import { AddItemDropDown } from './AddItemDropdown';
 import { Header } from './Header';
+import { HeaderDivider } from './HeaderDivider';
 
 const ItemBlock = ({
   item,
@@ -62,13 +63,23 @@ export const ItemDisplay = ({
             alignItems: 'center',
           }}
         >
-          <Header label="Inventory" color={COLORS.inventoryBackground} />
+          <Box
+            sx={{
+              display: 'flex',
+              width: '100%',
+              flexDirection: 'column',
+            }}
+          >
+            <Header label="Inventory" color={COLORS.inventoryBackground} />
+          </Box>
           {selectedAccount && (
-            <AddItemDropDown
-              label="Add Item"
-              addItemList={addItemsList}
-              handleChange={handleAddItemClick}
-            />
+            <>
+              <AddItemDropDown
+                label="Add Item"
+                addItemList={addItemsList}
+                handleChange={handleAddItemClick}
+              />
+            </>
           )}
         </Box>
       </Box>

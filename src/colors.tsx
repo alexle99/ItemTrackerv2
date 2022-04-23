@@ -11,6 +11,10 @@ const COLORS = {
   accountHover: 'pink',
   accountSidebarBackground: '#080808',
 
+  dropdownCategory: 'grey',
+  dropdownItem: 'grey',
+  dropdownText: 'white',
+
   itemButtonColor: '#333333',
   inventoryBackground: '#111111',
 };
