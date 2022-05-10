@@ -28,6 +28,9 @@ const Unobtainables = [
   'jester scythe',
   'baal head',
   'fang',
+  'jester hat',
+  'jester box',
+  'baal cape',
   'flowers',
   'elo hammer',
   'elo egg',
@@ -40,6 +43,7 @@ const Unobtainables = [
   'gift of lancer',
   'festival lancer',
   'festival shield',
+  'festival gifts',
 ];
 
 const Boats = ['Boats', 'striker', 'coffin', 'hover', 'flamingo boat'];
@@ -58,6 +62,9 @@ const KrakenStuff = [
   'azure kk gs',
   'azure cape',
   'azure katana',
+  'red sb set',
+  'blue sb set',
+  'green sb set',
 ];
 
 const Other = [
@@ -67,6 +74,7 @@ const Other = [
   'wb cape',
   'marine cape',
   'gravito blade',
+  'gravito cape',
   'trident',
   'bisento',
   'cutlass',
@@ -79,6 +87,8 @@ const Other = [
   'musashi hat',
   'karuta',
   'spare fruit bag',
+  'max sp resets',
+  'max dark roots',
 ];
 
 const itemList = [Fruits, Unobtainables, Boats, KrakenStuff, Other];
