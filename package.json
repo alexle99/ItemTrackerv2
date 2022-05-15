@@ -16,14 +16,14 @@
     "lint": "eslint src --ext .js,.ts,.jsx,.tsx"
   },
   "dependencies": {
-    "@emotion/react": "^11.8.2",
+    "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
-    "@fontsource/roboto": "^4.5.5",
-    "@mui/icons-material": "^5.5.0",
-    "@mui/material": "^5.5.0",
+    "@fontsource/roboto": "^4.5.7",
+    "@mui/icons-material": "^5.6.2",
+    "@mui/material": "^5.7.0",
     "axios": "latest",
     "dayjs": "latest",
-    "netlify-cli": "^9.16.7",
+    "netlify-cli": "^8.14.1",
     "react": "latest",
     "react-dom": "latest",
     "type-fest": "latest",
@@ -44,7 +44,7 @@
     "eslint-plugin-import": "latest",
     "eslint-plugin-react": "latest",
     "eslint-plugin-react-hooks": "latest",
-    "gh-pages": "^3.2.3",
+    "gh-pages": "^4.0.0",
     "prettier": "latest",
     "typescript": "latest",
     "vite": "latest"
