@@ -17,6 +17,7 @@ const COLORS = {
 
   itemButtonColor: '#333333',
   inventoryBackground: '#111111',
+  inventoryItemDefaultHover: '#00758c',
 };
 
 export default COLORS;

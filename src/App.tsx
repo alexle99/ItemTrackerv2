@@ -8,6 +8,9 @@ import { ConfirmationDialog } from './components/ConfirmationDialog';
 const Fruits = [
   'Fruits',
   'Mochi',
+  'Kage',
+  'Paw',
+  'Yomi',
   'Tori',
   'Pika',
   'Magu',
@@ -91,7 +94,32 @@ const Other = [
   'max dark roots',
 ];
 
-const itemList = [Fruits, Unobtainables, Boats, KrakenStuff, Other];
+const Other2 = [
+  "Ba'al core",
+  'squid game set',
+  'anniversary lantern',
+  'anniversary cap',
+  'anniversary hat',
+  'anniversary shades',
+  'golden hammer',
+  'buggy cape',
+  'cupid queen wings',
+  'karoo',
+  'mini bunny',
+];
+
+const ALL_ITEMS_STRING = [Fruits, Unobtainables, Boats, KrakenStuff, Other];
+
+const ALL_ITEMS = ALL_ITEMS_STRING.map((itemList) => {
+  const newItemList = itemList.map((itemName) => {
+    const newItem: Item = {
+      id: uuid(),
+      name: itemName,
+    };
+    return newItem;
+  });
+  return newItemList;
+});
 
 const actualAccounts = [
   'HAHAFAILUREJL',
@@ -121,7 +149,7 @@ const createAccounts = (accountList: string[]): Account[] => {
 };
 
 const dummyFunction = () => {
-  console.log('DUMMY FUNCTION');
+  console.log('dummy function');
 };
 
 const defaultAction = {
@@ -146,11 +174,7 @@ export const App = () => {
     setSelectedAccount(account);
   };
 
-  const addItemToItemList = (itemName: string) => {
-    const item: Item = {
-      id: uuid(),
-      name: itemName,
-    };
+  const addItemToInventory = (item: Item) => {
     for (const a in accounts) {
       if (accounts[a].userName === selectedAccount?.userName) {
         accounts[a].items.push(item);
@@ -160,7 +184,7 @@ export const App = () => {
     }
   };
 
-  const removeItemFromItemList = (itemToRemove: Item) => {
+  const removeItemFromInventory = (itemToRemove: Item) => {
     for (const a in accounts) {
       if (accounts[a].userName === selectedAccount?.userName) {
         accounts[a].items = accounts[a].items.filter((item) => {
@@ -169,6 +193,21 @@ export const App = () => {
         setAccounts(() => [...accounts]);
         return;
       }
+    }
+  };
+
+  const handleItemClick = (selectedItem: Item) => {
+    let foundItem = false;
+
+    selectedAccount?.items?.map((item) => {
+      if (item.name === selectedItem.name) {
+        foundItem = true;
+        removeItemFromInventory(item);
+      }
+    });
+
+    if (!foundItem) {
+      addItemToInventory(selectedItem);
     }
   };
 
@@ -220,13 +259,13 @@ export const App = () => {
           onSelect={handleSelected}
           currentSelected={selectedAccount}
         />
-        <ItemDisplay
-          items={selectedAccount?.items}
-          addItemsList={itemList}
-          addItemToItemList={addItemToItemList}
-          removeItemFromItemList={removeItemFromItemList}
-          selectedAccount={selectedAccount}
-        />
+        {selectedAccount && (
+          <ItemDisplay
+            inventory={selectedAccount?.items}
+            allItems={ALL_ITEMS}
+            handleClick={handleItemClick}
+          />
+        )}
         <ConfirmationDialog
           titleText={action.text}
           open={action.open}
