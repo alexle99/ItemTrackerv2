@@ -1,33 +1,34 @@
-import { Box, Button, Grid } from '@mui/material';
+import { Box, Button, Grid, Typography } from '@mui/material';
 import COLORS from '@/colors';
-import { Account, Item } from '@/types/account';
-import { AddItemDropDown } from './AddItemDropdown';
+import { Item } from '@/types/account';
 import { Header } from './Header';
-import { HeaderDivider } from './HeaderDivider';
 
 const ItemBlock = ({
   item,
-  removeItemFromItemList,
+  handleClick,
+  highlighted,
 }: {
   item: Item;
-  removeItemFromItemList: (item: Item) => void;
+  handleClick: (item: Item) => void;
+  highlighted: boolean;
 }) => {
   return (
-    <Grid
-      item
-      xs={3}
-      sx={{ padding: '.5rem', paddingBottom: 0, paddingLeft: 0 }}
-    >
+    <Grid item sx={{ paddingTop: '.5rem', paddingRight: '.5rem' }}>
       <Button
         sx={{
-          width: '100%',
           color: 'white',
           fontSize: '1.5em',
-          backgroundColor: COLORS.itemButtonColor,
-          '&:hover': { backgroundColor: 'red' },
+          backgroundColor: highlighted
+            ? COLORS.buttonColor
+            : COLORS.itemButtonColor,
+          '&:hover': {
+            backgroundColor: highlighted
+              ? COLORS.inventoryBackground
+              : COLORS.inventoryItemDefaultHover,
+          },
         }}
         variant="outlined"
-        onClick={() => removeItemFromItemList(item)}
+        onClick={() => handleClick(item)}
       >
         {item.name}
       </Button>
@@ -35,26 +36,80 @@ const ItemBlock = ({
   );
 };
 
-export const ItemDisplay = ({
-  items = [],
-  addItemsList,
-  addItemToItemList,
-  removeItemFromItemList,
-  selectedAccount,
+const ItemList = ({
+  itemList,
+  handleClick,
+  inventory,
 }: {
-  items?: Item[];
-  addItemsList: string[][];
-  addItemToItemList: (itemName: string) => void;
-  removeItemFromItemList: (item: Item) => void;
-  selectedAccount: Account | undefined;
+  itemList: Item[];
+  handleClick: (item: Item) => void;
+  inventory?: Item[];
 }) => {
-  const handleAddItemClick = (item: string) => {
-    console.log(item);
-    addItemToItemList(item);
-  };
-
+  const onlyItems = itemList.slice(1);
   return (
-    <Box sx={{ backgroundColor: COLORS.inventoryBackground }}>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+    >
+      <Typography
+        variant="h4"
+        sx={{
+          color: COLORS.headerColor,
+          paddingTop: '1rem',
+          paddingLeft: '1rem',
+        }}
+      >
+        {itemList[0].name}
+      </Typography>
+      <Box
+        sx={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          paddingLeft: '1rem',
+        }}
+      >
+        {onlyItems.map((item) => {
+          let highlighted = false;
+          {
+            inventory?.map((inv) => {
+              if (inv.name === item.name) {
+                highlighted = true;
+              }
+            });
+          }
+          return (
+            <ItemBlock
+              key={item.id}
+              item={item}
+              handleClick={handleClick}
+              highlighted={highlighted}
+            />
+          );
+        })}
+      </Box>
+    </Box>
+  );
+};
+
+export const ItemDisplay = ({
+  inventory,
+  allItems,
+  handleClick,
+}: {
+  inventory?: Item[];
+  allItems: Item[][];
+  handleClick: (item: Item) => void;
+}) => {
+  return (
+    <Box
+      className="Inventory"
+      sx={{
+        backgroundColor: COLORS.inventoryBackground,
+        paddingBottom: '2rem',
+      }}
+    >
       <Box>
         <Box
           sx={{
@@ -72,24 +127,16 @@ export const ItemDisplay = ({
           >
             <Header label="Inventory" color={COLORS.inventoryBackground} />
           </Box>
-          {selectedAccount && (
-            <>
-              <AddItemDropDown
-                label="Add Item"
-                addItemList={addItemsList}
-                handleChange={handleAddItemClick}
-              />
-            </>
-          )}
         </Box>
       </Box>
       <Grid container sx={{ paddingLeft: '.5rem' }}>
-        {items.map((item) => {
+        {allItems.map((itemList) => {
           return (
-            <ItemBlock
-              key={item.id}
-              item={item}
-              removeItemFromItemList={removeItemFromItemList}
+            <ItemList
+              key={itemList[0].id}
+              itemList={itemList}
+              handleClick={handleClick}
+              inventory={inventory}
             />
           );
         })}
