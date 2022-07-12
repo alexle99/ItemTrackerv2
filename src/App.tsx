@@ -95,6 +95,7 @@ const Other = [
 ];
 
 const Other2 = [
+  'Other2',
   "Ba'al core",
   'squid game set',
   'anniversary lantern',
@@ -108,7 +109,14 @@ const Other2 = [
   'mini bunny',
 ];
 
-const ALL_ITEMS_STRING = [Fruits, Unobtainables, Boats, KrakenStuff, Other];
+const ALL_ITEMS_STRING = [
+  Fruits,
+  Unobtainables,
+  Boats,
+  KrakenStuff,
+  Other,
+  Other2,
+];
 
 const ALL_ITEMS = ALL_ITEMS_STRING.map((itemList) => {
   const newItemList = itemList.map((itemName) => {
