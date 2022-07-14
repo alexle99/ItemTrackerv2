@@ -80,7 +80,6 @@ export const AccountSidebar = ({
     <Box>
       <Header label="Accounts" color={COLORS.accountSidebarBackground} />
       <Box>
-        <AddAccountBlock onAddAccount={onAddAccount} />
         {accounts.map((account) => {
           return (
             <AccountBlock
@@ -91,6 +90,7 @@ export const AccountSidebar = ({
             />
           );
         })}
+        <AddAccountBlock onAddAccount={onAddAccount} />
       </Box>
     </Box>
   );

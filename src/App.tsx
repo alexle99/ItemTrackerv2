@@ -109,16 +109,16 @@ const Other2 = [
   'mini bunny',
 ];
 
-// const ALL_ITEMS_STRING = [
-//   Fruits,
-//   Unobtainables,
-//   Boats,
-//   KrakenStuff,
-//   Other,
-//   Other2,
-// ];
+const ALL_ITEMS_STRING = [
+  Fruits,
+  Unobtainables,
+  Boats,
+  KrakenStuff,
+  Other,
+  Other2,
+];
 
-const ALL_ITEMS_STRING = [['category', 'test']];
+// const ALL_ITEMS_STRING = [['category', 'test']];
 
 // a list of list of Items
 const ALL_ITEMS = ALL_ITEMS_STRING.map((itemList) => {
@@ -146,7 +146,7 @@ const ALL_ITEMS = ALL_ITEMS_STRING.map((itemList) => {
 //   'gkdjhsgadigi5',
 // ];
 
-const actualAccounts = ['test'];
+const actualAccounts: string[] = [];
 
 const createAccounts = (accountList: string[]): Account[] => {
   const result: Account[] = [];
@@ -250,7 +250,10 @@ export const App = () => {
     console.log('created account');
     console.table(account);
     setAccounts(() => [...accounts, account]);
-    // return account;
+  };
+
+  const handleRemoveAccount = (id: string) => {
+    console.log('implement this');
   };
 
   const saveAction = {
