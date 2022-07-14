@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
 import { v4 as uuid } from 'uuid';
 import { AccountSidebar, ItemDisplay, Navbar } from '@/components';
-import { Account, Item } from '@/types/account';
+import { Account, Category, Item } from '@/types/account';
 import { ConfirmationDialog } from './components/ConfirmationDialog';
 
 const Fruits = [
@@ -109,15 +109,18 @@ const Other2 = [
   'mini bunny',
 ];
 
-const ALL_ITEMS_STRING = [
-  Fruits,
-  Unobtainables,
-  Boats,
-  KrakenStuff,
-  Other,
-  Other2,
-];
+// const ALL_ITEMS_STRING = [
+//   Fruits,
+//   Unobtainables,
+//   Boats,
+//   KrakenStuff,
+//   Other,
+//   Other2,
+// ];
 
+const ALL_ITEMS_STRING = [['category', 'test']];
+
+// a list of list of Items
 const ALL_ITEMS = ALL_ITEMS_STRING.map((itemList) => {
   const newItemList = itemList.map((itemName) => {
     const newItem: Item = {
@@ -129,19 +132,21 @@ const ALL_ITEMS = ALL_ITEMS_STRING.map((itemList) => {
   return newItemList;
 });
 
-const actualAccounts = [
-  'HAHAFAILUREJL',
-  'HAHAFAILUREOG',
-  'JackofAllStonks',
-  'Hotakiu',
-  'EmeraldyFan',
-  'FakeVibeQ',
-  'breuimarealhuman',
-  'the_fakerobot',
-  'ElectrifiedTape',
-  'kjghk5j43509i',
-  'gkdjhsgadigi5',
-];
+// const actualAccounts = [
+//   'HAHAFAILUREJL',
+//   'HAHAFAILUREOG',
+//   'JackofAllStonks',
+//   'Hotakiu',
+//   'EmeraldyFan',
+//   'FakeVibeQ',
+//   'breuimarealhuman',
+//   'the_fakerobot',
+//   'ElectrifiedTape',
+//   'kjghk5j43509i',
+//   'gkdjhsgadigi5',
+// ];
+
+const actualAccounts = ['test'];
 
 const createAccounts = (accountList: string[]): Account[] => {
   const result: Account[] = [];
@@ -236,6 +241,18 @@ export const App = () => {
     }
   };
 
+  const handleAddAccount = (value: string) => {
+    const account: Account = {
+      id: uuid(),
+      userName: value,
+      items: [],
+    };
+    console.log('created account');
+    console.table(account);
+    setAccounts(() => [...accounts, account]);
+    // return account;
+  };
+
   const saveAction = {
     text: 'Save',
     open: true,
@@ -266,6 +283,7 @@ export const App = () => {
           accounts={accounts}
           onSelect={handleSelected}
           currentSelected={selectedAccount}
+          onAddAccount={handleAddAccount}
         />
         {selectedAccount && (
           <ItemDisplay
