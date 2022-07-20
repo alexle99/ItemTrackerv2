@@ -30,19 +30,11 @@ export const Navbar = ({
           flexDirection: 'row',
         }}
       >
-        <ListOutlinedIcon
-          sx={{
-            alignSelf: 'center',
-            height: '50px',
-            width: '50px',
-            marginLeft: '.5%',
-          }}
-        />
         <Typography
           variant="h3"
           sx={{
             alignSelf: 'center',
-            paddingLeft: '1%',
+            paddingLeft: '.5rem',
             width: 'fitContent',
             whiteSpace: 'nowrap',
           }}

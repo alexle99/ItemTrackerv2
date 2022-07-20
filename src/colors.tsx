@@ -1,23 +1,21 @@
+const THEME = '#00B4D8';
+
 const COLORS = {
   navbarBackground: 'black',
   primaryText: 'white',
   headerColor: 'white',
   buttonText: 'white',
-  buttonColor: '#00B4D8',
+  buttonColor: THEME,
 
-  accountButtonColor: 'grey',
-  accountHeaderBackground: 'grey',
-  accountSelected: '#262626',
-  accountHover: 'pink',
-  accountSidebarBackground: '#080808',
+  accountButton: '#444444',
+  accountSelected: THEME,
+  accountHover: 'green',
+  accountSidebarBackground: '#111111',
 
-  dropdownCategory: 'grey',
-  dropdownItem: 'grey',
-  dropdownText: 'white',
-
-  itemButtonColor: '#333333',
-  inventoryBackground: '#111111',
-  inventoryItemDefaultHover: '#00758c',
+  itemButton: '#444444',
+  itemDefaultHover: THEME,
+  inventoryBackground: '#222222',
+  // inventoryItemDefaultHover: '#00758c', // shallower blue
 };
 
 export default COLORS;
