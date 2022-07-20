@@ -51,6 +51,10 @@
     "vite": "latest"
   },
   "resolutions": {
-    "minimist": "1.2.6"
+    "minimist": "1.2.6",
+    "glob-parent": "5.1.2",
+    "ansi-regex": "4.1.1",
+    "got": "11.8.5",
+    "follow-redirects": "1.14.8"
   }
 }
