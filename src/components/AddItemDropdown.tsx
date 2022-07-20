@@ -1,13 +1,5 @@
 import { useState } from 'react';
-import {
-  Box,
-  Button,
-  Divider,
-  Menu,
-  MenuItem,
-  Theme,
-  makeStyles,
-} from '@mui/material';
+import { Box, Button, Menu, MenuItem } from '@mui/material';
 import COLORS from '@/colors';
 
 const AddItemButton = ({

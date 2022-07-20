@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
 import { v4 as uuid } from 'uuid';
 import { AccountSidebar, ItemDisplay, Navbar } from '@/components';
-import { Account, Category, Item } from '@/types/account';
+import { Account, Item } from '@/types/account';
 import { ConfirmationDialog } from './components/ConfirmationDialog';
 
 const Fruits = [
@@ -146,6 +146,8 @@ const ALL_ITEMS = ALL_ITEMS_STRING.map((itemList) => {
 //   'gkdjhsgadigi5',
 // ];
 
+// originally strings of account names to be turned into list of accounts
+// with useState
 const actualAccounts: string[] = [];
 
 const createAccounts = (accountList: string[]): Account[] => {
@@ -182,6 +184,8 @@ export const App = () => {
   useEffect(() => {
     setSavedState(false);
   }, [accounts]);
+
+  // useEffect(() => handleLoad());
 
   const handleSelected = (account: Account) => {
     setSelectedAccount(account);
@@ -247,13 +251,14 @@ export const App = () => {
       userName: value,
       items: [],
     };
-    console.log('created account');
-    console.table(account);
     setAccounts(() => [...accounts, account]);
   };
 
   const handleRemoveAccount = (id: string) => {
-    console.log('implement this');
+    const newAccounts = accounts.filter((account) => {
+      return account.id !== id;
+    });
+    setAccounts(() => [...newAccounts]);
   };
 
   const saveAction = {
@@ -287,6 +292,7 @@ export const App = () => {
           onSelect={handleSelected}
           currentSelected={selectedAccount}
           onAddAccount={handleAddAccount}
+          onRemove={handleRemoveAccount}
         />
         {selectedAccount && (
           <ItemDisplay

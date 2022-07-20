@@ -17,17 +17,16 @@ const ItemBlock = ({
       <Button
         sx={{
           color: 'white',
-          fontSize: '1.5em',
-          backgroundColor: highlighted
-            ? COLORS.buttonColor
-            : COLORS.itemButtonColor,
+          fontSize: '1.3em',
+          backgroundColor: highlighted ? COLORS.buttonColor : COLORS.itemButton,
           '&:hover': {
             backgroundColor: highlighted
-              ? COLORS.inventoryBackground
-              : COLORS.inventoryItemDefaultHover,
+              ? COLORS.itemButton
+              : COLORS.itemDefaultHover,
           },
+          border: '1px lightblue solid',
+          borderRadius: '.5rem',
         }}
-        variant="outlined"
         onClick={() => handleClick(item)}
       >
         {item.name}
