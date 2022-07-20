@@ -7,6 +7,7 @@
     "not dead"
   ],
   "scripts": {
+    "preinstall":"npx npm-force-resolutions",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "dev": "vite",
@@ -16,14 +17,14 @@
     "lint": "eslint src --ext .js,.ts,.jsx,.tsx"
   },
   "dependencies": {
-    "@emotion/react": "^11.9.0",
-    "@emotion/styled": "^11.8.1",
+    "@emotion/react": "^11.9.3",
+    "@emotion/styled": "^11.9.3",
     "@fontsource/roboto": "^4.5.7",
-    "@mui/icons-material": "^5.6.2",
-    "@mui/material": "^5.7.0",
+    "@mui/icons-material": "^5.8.4",
+    "@mui/material": "^5.9.1",
     "axios": "latest",
     "dayjs": "latest",
-    "netlify-cli": "^8.19.3",
+    "netlify-cli": "^10.10.2",
     "react": "latest",
     "react-dom": "latest",
     "type-fest": "latest",
@@ -48,5 +49,8 @@
     "prettier": "latest",
     "typescript": "latest",
     "vite": "latest"
+  },
+  "resolutions": {
+    "minimist": "1.2.6"
   }
 }
