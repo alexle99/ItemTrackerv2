@@ -1,6 +1,6 @@
-import { Box, Button, Grid, Typography } from '@mui/material';
+import { Box, Button, Grid, InputBase, Typography } from '@mui/material';
 import COLORS from '@/colors';
-import { Item } from '@/types/account';
+import { Category, Item } from '@/types/account';
 import { Header } from './Header';
 
 const ItemBlock = ({
@@ -35,23 +35,19 @@ const ItemBlock = ({
   );
 };
 
-const ItemList = ({
-  itemList,
-  handleClick,
-  inventory,
+const CategoriesDisplay = ({
+  category,
+  handleItemClick,
 }: {
-  itemList: Item[];
-  handleClick: (item: Item) => void;
-  inventory?: Item[];
+  category: Category;
+  handleItemClick: (item: Item, category: Category) => void;
 }) => {
-  const onlyItems = itemList.slice(1);
+  const handleItemClickForCategory = (item: Item) => {
+    handleItemClick(item, category);
+  };
+
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-      }}
-    >
+    <Box sx={{ border: '1px white solid', width: '100%' }}>
       <Typography
         variant="h4"
         sx={{
@@ -60,7 +56,7 @@ const ItemList = ({
           paddingLeft: '1rem',
         }}
       >
-        {itemList[0].name}
+        {category.name}
       </Typography>
       <Box
         sx={{
@@ -69,21 +65,13 @@ const ItemList = ({
           paddingLeft: '1rem',
         }}
       >
-        {onlyItems.map((item) => {
-          let highlighted = false;
-          {
-            inventory?.map((inv) => {
-              if (inv.name === item.name) {
-                highlighted = true;
-              }
-            });
-          }
+        {category.items.map((item) => {
           return (
             <ItemBlock
               key={item.id}
               item={item}
-              handleClick={handleClick}
-              highlighted={highlighted}
+              handleClick={handleItemClickForCategory}
+              highlighted={item.exists}
             />
           );
         })}
@@ -92,14 +80,39 @@ const ItemList = ({
   );
 };
 
-export const ItemDisplay = ({
-  inventory,
-  allItems,
-  handleClick,
+const AddCategory = ({
+  handleAddCategory,
 }: {
-  inventory?: Item[];
-  allItems: Item[][];
-  handleClick: (item: Item) => void;
+  handleAddCategory: (value: string) => void;
+}) => {
+  return (
+    <Box>
+      <Box sx={{ border: '1px white solid' }}>
+        <InputBase
+          sx={{ ml: '1rem', flex: '1' }}
+          placeholder="Add Category"
+          inputProps={{ style: { color: 'white', padding: '1rem' } }}
+          onKeyPress={(e) => {
+            if (e.key === 'Enter' && (e.target as HTMLInputElement).value) {
+              e.preventDefault();
+              handleAddCategory((e.target as HTMLInputElement).value);
+              (e.target as HTMLInputElement).value = '';
+            }
+          }}
+        />
+      </Box>
+    </Box>
+  );
+};
+
+export const ItemDisplay = ({
+  categories,
+  handleItemClick,
+  handleAddCategory,
+}: {
+  categories: Category[];
+  handleItemClick: (item: Item, category: Category) => void;
+  handleAddCategory: (value: string) => void;
 }) => {
   return (
     <Box
@@ -129,17 +142,17 @@ export const ItemDisplay = ({
         </Box>
       </Box>
       <Grid container sx={{ paddingLeft: '.5rem' }}>
-        {allItems.map((itemList) => {
+        {categories.map((category) => {
           return (
-            <ItemList
-              key={itemList[0].id}
-              itemList={itemList}
-              handleClick={handleClick}
-              inventory={inventory}
+            <CategoriesDisplay
+              key={category.id}
+              category={category}
+              handleItemClick={handleItemClick}
             />
           );
         })}
       </Grid>
+      <AddCategory handleAddCategory={handleAddCategory} />
     </Box>
   );
 };

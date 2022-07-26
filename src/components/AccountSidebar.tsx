@@ -1,5 +1,5 @@
 import CloseIcon from '@mui/icons-material/Close';
-import { Box, Button, InputBase, TextField } from '@mui/material';
+import { Box, Button, InputBase } from '@mui/material';
 import COLORS from '@/colors';
 import { Account } from '@/types/account';
 import { Header } from './Header';
@@ -16,7 +16,7 @@ const AddAccountBlock = ({
     <Box sx={{ border: '1px white solid' }}>
       <InputBase
         sx={{ ml: '1rem', flex: '1' }}
-        placeholder="Add"
+        placeholder="Add Account"
         inputProps={{ style: { color: 'white', padding: '1rem' } }}
         onKeyPress={(e) => {
           if (e.key === 'Enter' && (e.target as HTMLInputElement).value) {
@@ -81,26 +81,6 @@ const AccountBlock = ({
         }}
         onClick={() => onRemove(account.id)}
       />
-      {/* <Button
-        sx={{
-          height: '2rem',
-          width: '2rem',
-          minWidth: '1rem',
-          color: 'white',
-          top: '.5rem',
-          right: '.5rem',
-          // '&:hover': {
-          //   backgroundColor: 'red',
-          // },
-        }}
-        // onClick={() => onRemove(account.id)}
-      >
-        <CloseIcon
-          fontSize="small"
-          sx={{ color: 'gray', '&:hover': { color: 'white' } }}
-          onClick={() => onRemove(account.id)}
-        />
-      </Button> */}
     </Box>
   );
 };

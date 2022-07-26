@@ -2,182 +2,182 @@ import { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
 import { v4 as uuid } from 'uuid';
 import { AccountSidebar, ItemDisplay, Navbar } from '@/components';
-import { Account, Item } from '@/types/account';
+import { Account, Category, Item } from '@/types/account';
 import { ConfirmationDialog } from './components/ConfirmationDialog';
 
-const Fruits = [
-  'Fruits',
-  'Mochi',
-  'Kage',
-  'Paw',
-  'Yomi',
-  'Tori',
-  'Pika',
-  'Magu',
-  'Mera',
-  'Ito',
-  'Goro',
-  'Hie',
-  'Suna',
-  'Gura',
-  'Zushi',
-];
-
-const Unobtainables = [
-  'Unobtainables',
-  'candy cane',
-  'prestige bag',
-  'jester outfit',
-  'jester scythe',
-  'baal head',
-  'fang',
-  'jester hat',
-  'jester box',
-  'baal cape',
-  'flowers',
-  'elo hammer',
-  'elo egg',
-  'elo other eggs',
-  'santa bells',
-  'santa hat',
-  'elf hat',
-  'cupid queen outfit',
-  'other cupid drops',
-  'gift of lancer',
-  'festival lancer',
-  'festival shield',
-  'festival gifts',
-];
-
-const Boats = ['Boats', 'striker', 'coffin', 'hover', 'flamingo boat'];
-
-const KrakenStuff = [
-  'Kraken Stuff',
-  'both cores',
-  'kraken core',
-  'sb core',
-  'red kraken set',
-  'gold kraken set',
-  'green kraken set',
-  'blue kraken set',
-  'purple kraken set',
-  'azure kk armor',
-  'azure kk gs',
-  'azure cape',
-  'azure katana',
-  'red sb set',
-  'blue sb set',
-  'green sb set',
-];
-
-const Other = [
-  'other',
-  'drums',
-  'croc cape',
-  'wb cape',
-  'marine cape',
-  'gravito blade',
-  'gravito cape',
-  'trident',
-  'bisento',
-  'cutlass',
-  'kiribachi',
-  'cho crown',
-  'pole',
-  'golden hook',
-  'neptune crown',
-  'musashi set',
-  'musashi hat',
-  'karuta',
-  'spare fruit bag',
-  'max sp resets',
-  'max dark roots',
-];
-
-const Other2 = [
-  'Other2',
-  "Ba'al core",
-  'squid game set',
-  'anniversary lantern',
-  'anniversary cap',
-  'anniversary hat',
-  'anniversary shades',
-  'golden hammer',
-  'buggy cape',
-  'cupid queen wings',
-  'karoo',
-  'mini bunny',
-];
-
-const ALL_ITEMS_STRING = [
-  Fruits,
-  Unobtainables,
-  Boats,
-  KrakenStuff,
-  Other,
-  Other2,
-];
-
-// const ALL_ITEMS_STRING = [['category', 'test']];
-
-// a list of list of Items
-const ALL_ITEMS = ALL_ITEMS_STRING.map((itemList) => {
-  const newItemList = itemList.map((itemName) => {
-    const newItem: Item = {
-      id: uuid(),
-      name: itemName,
-    };
-    return newItem;
-  });
-  return newItemList;
-});
-
-// const actualAccounts = [
-//   'HAHAFAILUREJL',
-//   'HAHAFAILUREOG',
-//   'JackofAllStonks',
-//   'Hotakiu',
-//   'EmeraldyFan',
-//   'FakeVibeQ',
-//   'breuimarealhuman',
-//   'the_fakerobot',
-//   'ElectrifiedTape',
-//   'kjghk5j43509i',
-//   'gkdjhsgadigi5',
+// const Fruits = [
+//   'Fruits',
+//   'Mochi',
+//   'Kage',
+//   'Paw',
+//   'Yomi',
+//   'Tori',
+//   'Pika',
+//   'Magu',
+//   'Mera',
+//   'Ito',
+//   'Goro',
+//   'Hie',
+//   'Suna',
+//   'Gura',
+//   'Zushi',
 // ];
 
-// originally strings of account names to be turned into list of accounts
-// with useState
-const actualAccounts: string[] = [];
+// const Unobtainables = [
+//   'Unobtainables',
+//   'candy cane',
+//   'prestige bag',
+//   'jester outfit',
+//   'jester scythe',
+//   'baal head',
+//   'fang',
+//   'jester hat',
+//   'jester box',
+//   'baal cape',
+//   'flowers',
+//   'elo hammer',
+//   'elo egg',
+//   'elo other eggs',
+//   'santa bells',
+//   'santa hat',
+//   'elf hat',
+//   'cupid queen outfit',
+//   'other cupid drops',
+//   'gift of lancer',
+//   'festival lancer',
+//   'festival shield',
+//   'festival gifts',
+// ];
 
-const createAccounts = (accountList: string[]): Account[] => {
-  const result: Account[] = [];
-  for (const i in accountList) {
-    const account: Account = {
-      id: uuid(),
-      userName: accountList[i],
-      items: [],
-    };
-    result.push(account);
-  }
-  return result;
+// const Boats = ['Boats', 'striker', 'coffin', 'hover', 'flamingo boat'];
+
+// const KrakenStuff = [
+//   'Kraken Stuff',
+//   'both cores',
+//   'kraken core',
+//   'sb core',
+//   'red kraken set',
+//   'gold kraken set',
+//   'green kraken set',
+//   'blue kraken set',
+//   'purple kraken set',
+//   'azure kk armor',
+//   'azure kk gs',
+//   'azure cape',
+//   'azure katana',
+//   'red sb set',
+//   'blue sb set',
+//   'green sb set',
+// ];
+
+// const Other = [
+//   'other',
+//   'drums',
+//   'croc cape',
+//   'wb cape',
+//   'marine cape',
+//   'gravito blade',
+//   'gravito cape',
+//   'trident',
+//   'bisento',
+//   'cutlass',
+//   'kiribachi',
+//   'cho crown',
+//   'pole',
+//   'golden hook',
+//   'neptune crown',
+//   'musashi set',
+//   'musashi hat',
+//   'karuta',
+//   'spare fruit bag',
+//   'max sp resets',
+//   'max dark roots',
+// ];
+
+// const Other2 = [
+//   'Other2',
+//   "Ba'al core",
+//   'squid game set',
+//   'anniversary lantern',
+//   'anniversary cap',
+//   'anniversary hat',
+//   'anniversary shades',
+//   'golden hammer',
+//   'buggy cape',
+//   'cupid queen wings',
+//   'karoo',
+//   'mini bunny',
+// ];
+
+// const ALL_ITEMS_STRING = [
+//   Fruits,
+//   Unobtainables,
+//   Boats,
+//   KrakenStuff,
+//   Other,
+//   Other2,
+// ];
+
+const fruitCategory: Category = {
+  id: uuid(),
+  name: 'Fruits',
+  items: [
+    { id: uuid(), name: 'Mochi', exists: true },
+    { id: uuid(), name: 'Kage', exists: false },
+    { id: uuid(), name: 'Paw', exists: true },
+  ],
 };
 
-const dummyFunction = () => {
-  console.log('dummy function');
+const unobtainablesCategory: Category = {
+  id: uuid(),
+  name: 'Unobtainables',
+  items: [
+    { id: uuid(), name: 'candy cane', exists: true },
+    { id: uuid(), name: 'prestige bag', exists: true },
+    { id: uuid(), name: 'jester outfit', exists: true },
+  ],
 };
+
+const boatsCategory: Category = {
+  id: uuid(),
+  name: 'Boats',
+  items: [
+    { id: uuid(), name: 'striker', exists: false },
+    { id: uuid(), name: 'coffin', exists: true },
+    { id: uuid(), name: 'hover', exists: true },
+  ],
+};
+
+const emptyCategory: Category = {
+  id: uuid(),
+  name: 'Empty',
+  items: [],
+};
+
+const actualCategories: Category[] = [
+  fruitCategory,
+  unobtainablesCategory,
+  emptyCategory,
+  boatsCategory,
+];
 
 const defaultAction = {
   text: '',
   open: false,
-  actionFunction: dummyFunction,
+  actionFunction: () => {
+    console.log('dummy function');
+  },
+};
+
+const dummyAccount: Account = {
+  id: 'asdf',
+  userName: 'chicken',
+  categories: actualCategories,
 };
 
 export const App = () => {
-  const [accounts, setAccounts] = useState<Account[]>(
-    createAccounts(actualAccounts)
-  );
-  const [selectedAccount, setSelectedAccount] = useState<Account | undefined>();
+  const [accounts, setAccounts] = useState<Account[]>([dummyAccount]);
+  const [selectedAccount, setSelectedAccount] = useState<Account>(dummyAccount);
   const [savedState, setSavedState] = useState(false);
   const [action, setAction] = useState(defaultAction);
 
@@ -185,47 +185,50 @@ export const App = () => {
     setSavedState(false);
   }, [accounts]);
 
-  // useEffect(() => handleLoad());
-
   const handleSelected = (account: Account) => {
     setSelectedAccount(account);
   };
 
-  const addItemToInventory = (item: Item) => {
+  const toggleItemExists = (item: Item, category: Category) => {
     for (const a in accounts) {
-      if (accounts[a].userName === selectedAccount?.userName) {
-        accounts[a].items.push(item);
-        setAccounts(() => [...accounts]);
-        break;
+      if (accounts[a].id === selectedAccount?.id) {
+        for (const c in accounts[a].categories) {
+          if (accounts[a].categories[c].id === category.id) {
+            for (const i in accounts[a].categories[c].items) {
+              if (accounts[a].categories[c].items[i].id === item.id) {
+                console.table(item);
+                accounts[a].categories[c].items[i].exists =
+                  !accounts[a].categories[c].items[i].exists;
+                setAccounts(() => [...accounts]);
+                return;
+              }
+            }
+          }
+        }
       }
     }
   };
 
-  const removeItemFromInventory = (itemToRemove: Item) => {
+  const addCategoryToSelectedAccount = (value: string) => {
+    const newCategory: Category = { id: uuid(), name: value, items: [] };
     for (const a in accounts) {
       if (accounts[a].userName === selectedAccount?.userName) {
-        accounts[a].items = accounts[a].items.filter((item) => {
-          return item !== itemToRemove;
-        });
+        accounts[a].categories.push(newCategory);
         setAccounts(() => [...accounts]);
         return;
       }
     }
   };
 
-  const handleItemClick = (selectedItem: Item) => {
-    let foundItem = false;
-
-    selectedAccount?.items?.map((item) => {
-      if (item.name === selectedItem.name) {
-        foundItem = true;
-        removeItemFromInventory(item);
-      }
+  const handleItemClick = (selectedItem: Item, category: Category) => {
+    selectedAccount?.categories.map((c) => {
+      c.items.map((item) => {
+        if (item === selectedItem) {
+          toggleItemExists(selectedItem, category);
+          return;
+        }
+      });
     });
-
-    if (!foundItem) {
-      addItemToInventory(selectedItem);
-    }
   };
 
   const handleSave = () => {
@@ -249,7 +252,7 @@ export const App = () => {
     const account: Account = {
       id: uuid(),
       userName: value,
-      items: [],
+      categories: [],
     };
     setAccounts(() => [...accounts, account]);
   };
@@ -296,9 +299,9 @@ export const App = () => {
         />
         {selectedAccount && (
           <ItemDisplay
-            inventory={selectedAccount?.items}
-            allItems={ALL_ITEMS}
-            handleClick={handleItemClick}
+            categories={selectedAccount?.categories}
+            handleItemClick={handleItemClick}
+            handleAddCategory={addCategoryToSelectedAccount}
           />
         )}
         <ConfirmationDialog
