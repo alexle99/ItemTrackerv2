@@ -169,15 +169,15 @@ const defaultAction = {
   },
 };
 
-const dummyAccount: Account = {
-  id: 'asdf',
-  userName: 'chicken',
-  categories: actualCategories,
-};
+// const dummyAccount: Account = {
+//   id: 'asdf',
+//   userName: 'chicken',
+//   categories: actualCategories,
+// };
 
 export const App = () => {
-  const [accounts, setAccounts] = useState<Account[]>([dummyAccount]);
-  const [selectedAccount, setSelectedAccount] = useState<Account>(dummyAccount);
+  const [accounts, setAccounts] = useState<Account[]>([]);
+  const [selectedAccount, setSelectedAccount] = useState<Account>();
   const [savedState, setSavedState] = useState(false);
   const [action, setAction] = useState(defaultAction);
 
@@ -220,6 +220,21 @@ export const App = () => {
     }
   };
 
+  const addItemToCategory = (value: string, category: Category) => {
+    const newItem: Item = { id: uuid(), name: value, exists: false };
+    for (const a in accounts) {
+      if (accounts[a].userName === selectedAccount?.userName) {
+        for (const c in accounts[a].categories) {
+          if (accounts[a].categories[c] === category) {
+            accounts[a].categories[c].items.push(newItem);
+            setAccounts(() => [...accounts]);
+            return;
+          }
+        }
+      }
+    }
+  };
+
   const handleItemClick = (selectedItem: Item, category: Category) => {
     selectedAccount?.categories.map((c) => {
       c.items.map((item) => {
@@ -255,6 +270,7 @@ export const App = () => {
       categories: [],
     };
     setAccounts(() => [...accounts, account]);
+    console.table(accounts);
   };
 
   const handleRemoveAccount = (id: string) => {
@@ -302,6 +318,7 @@ export const App = () => {
             categories={selectedAccount?.categories}
             handleItemClick={handleItemClick}
             handleAddCategory={addCategoryToSelectedAccount}
+            addItemToCategory={addItemToCategory}
           />
         )}
         <ConfirmationDialog

@@ -35,51 +35,6 @@ const ItemBlock = ({
   );
 };
 
-const CategoriesDisplay = ({
-  category,
-  handleItemClick,
-}: {
-  category: Category;
-  handleItemClick: (item: Item, category: Category) => void;
-}) => {
-  const handleItemClickForCategory = (item: Item) => {
-    handleItemClick(item, category);
-  };
-
-  return (
-    <Box sx={{ border: '1px white solid', width: '100%' }}>
-      <Typography
-        variant="h4"
-        sx={{
-          color: COLORS.headerColor,
-          paddingTop: '1rem',
-          paddingLeft: '1rem',
-        }}
-      >
-        {category.name}
-      </Typography>
-      <Box
-        sx={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          paddingLeft: '1rem',
-        }}
-      >
-        {category.items.map((item) => {
-          return (
-            <ItemBlock
-              key={item.id}
-              item={item}
-              handleClick={handleItemClickForCategory}
-              highlighted={item.exists}
-            />
-          );
-        })}
-      </Box>
-    </Box>
-  );
-};
-
 const AddCategory = ({
   handleAddCategory,
 }: {
@@ -105,14 +60,98 @@ const AddCategory = ({
   );
 };
 
+const AddItem = ({
+  handleAddItem,
+  categoryName,
+}: {
+  handleAddItem: (value: string) => void;
+  categoryName: string;
+}) => {
+  const placeholder = 'Add ' + categoryName;
+  return (
+    <InputBase
+      sx={{ width: '20rem', border: '1px white solid' }}
+      placeholder={placeholder}
+      inputProps={{ style: { color: 'white', padding: '1rem' } }}
+      onKeyPress={(e) => {
+        if (e.key === 'Enter' && (e.target as HTMLInputElement).value) {
+          e.preventDefault();
+          handleAddItem((e.target as HTMLInputElement).value);
+          (e.target as HTMLInputElement).value = '';
+        }
+      }}
+    />
+  );
+};
+
+const CategoriesDisplay = ({
+  category,
+  handleItemClick,
+  addItemToCategory,
+}: {
+  category: Category;
+  handleItemClick: (item: Item, category: Category) => void;
+  addItemToCategory: (value: string, category: Category) => void;
+}) => {
+  const handleItemClickForCategory = (item: Item) => {
+    handleItemClick(item, category);
+  };
+
+  const handleAddItemToCategory = (value: string) => {
+    addItemToCategory(value, category);
+  };
+
+  return (
+    <Box sx={{ border: '1px white solid', width: '100%' }}>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Typography
+          variant="h4"
+          sx={{
+            color: COLORS.headerColor,
+            paddingTop: '1rem',
+            paddingLeft: '1rem',
+          }}
+        >
+          {category.name}
+        </Typography>
+        <AddItem
+          handleAddItem={handleAddItemToCategory}
+          categoryName={category.name}
+        />
+      </Box>
+
+      <Box
+        sx={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          paddingLeft: '1rem',
+        }}
+      >
+        {category.items.map((item) => {
+          return (
+            <ItemBlock
+              key={item.id}
+              item={item}
+              handleClick={handleItemClickForCategory}
+              highlighted={item.exists}
+            />
+          );
+        })}
+      </Box>
+    </Box>
+  );
+};
+
 export const ItemDisplay = ({
   categories,
   handleItemClick,
   handleAddCategory,
+  addItemToCategory,
 }: {
   categories: Category[];
   handleItemClick: (item: Item, category: Category) => void;
   handleAddCategory: (value: string) => void;
+  addItemToCategory: (value: string, category: Category) => void;
 }) => {
   return (
     <Box
@@ -148,6 +187,7 @@ export const ItemDisplay = ({
               key={category.id}
               category={category}
               handleItemClick={handleItemClick}
+              addItemToCategory={addItemToCategory}
             />
           );
         })}
