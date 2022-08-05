@@ -1,15 +1,34 @@
 import '@fontsource/roboto/300.css';
-import ListOutlinedIcon from '@mui/icons-material/ListOutlined';
-import { AppBar, Box, Typography } from '@mui/material';
+import { AppBar, Box, Button, Typography } from '@mui/material';
 import COLORS from '@/colors';
 import { SaveState } from './SaveState';
+
+const LoadTemplate = ({ onLoadTemplate }: { onLoadTemplate: () => void }) => {
+  return (
+    <Button
+      variant="outlined"
+      sx={{
+        width: 'auto',
+        color: COLORS.buttonText,
+        backgroundColor: COLORS.buttonColor,
+        fontSize: '1.4em',
+        marginLeft: '20px',
+      }}
+      onClick={onLoadTemplate}
+    >
+      load template
+    </Button>
+  );
+};
 
 export const Navbar = ({
   savedState,
   toggleDialog,
+  loadTemplate,
 }: {
   savedState: boolean;
   toggleDialog: (arg0: string) => void;
+  loadTemplate: () => void;
 }) => {
   const label = 'Item Tracker';
   return (
@@ -42,6 +61,7 @@ export const Navbar = ({
           {label}
         </Typography>
       </Box>
+      <LoadTemplate onLoadTemplate={loadTemplate} />
       <SaveState savedState={savedState} handleClick={toggleDialog} />
     </AppBar>
   );

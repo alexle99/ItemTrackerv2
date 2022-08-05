@@ -15,7 +15,8 @@ const COLORS = {
   itemButton: '#444444',
   itemDefaultHover: THEME,
   inventoryBackground: '#222222',
-  // inventoryItemDefaultHover: '#00758c', // shallower blue
+
+  categoryHeaderBackground: '#444444',
 };
 
 export default COLORS;

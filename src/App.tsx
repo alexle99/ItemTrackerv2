@@ -1,164 +1,145 @@
 import { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
 import { v4 as uuid } from 'uuid';
-import { AccountSidebar, ItemDisplay, Navbar } from '@/components';
+import { AccountSidebar, Inventory, Navbar } from '@/components';
 import { Account, Category, Item } from '@/types/account';
 import { ConfirmationDialog } from './components/ConfirmationDialog';
 
-// const Fruits = [
-//   'Fruits',
-//   'Mochi',
-//   'Kage',
-//   'Paw',
-//   'Yomi',
-//   'Tori',
-//   'Pika',
-//   'Magu',
-//   'Mera',
-//   'Ito',
-//   'Goro',
-//   'Hie',
-//   'Suna',
-//   'Gura',
-//   'Zushi',
-// ];
+const Fruits = [
+  'Fruits',
+  'Mochi',
+  'Kage',
+  'Paw',
+  'Yomi',
+  'Tori',
+  'Pika',
+  'Magu',
+  'Mera',
+  'Ito',
+  'Goro',
+  'Hie',
+  'Suna',
+  'Gura',
+  'Zushi',
+];
 
-// const Unobtainables = [
-//   'Unobtainables',
-//   'candy cane',
-//   'prestige bag',
-//   'jester outfit',
-//   'jester scythe',
-//   'baal head',
-//   'fang',
-//   'jester hat',
-//   'jester box',
-//   'baal cape',
-//   'flowers',
-//   'elo hammer',
-//   'elo egg',
-//   'elo other eggs',
-//   'santa bells',
-//   'santa hat',
-//   'elf hat',
-//   'cupid queen outfit',
-//   'other cupid drops',
-//   'gift of lancer',
-//   'festival lancer',
-//   'festival shield',
-//   'festival gifts',
-// ];
+const Unobtainables = [
+  'Unobtainables',
+  'candy cane',
+  'prestige bag',
+  'jester outfit',
+  'jester scythe',
+  'baal head',
+  'fang',
+  'jester hat',
+  'jester box',
+  'baal cape',
+  'flowers',
+  'elo hammer',
+  'elo egg',
+  'elo other eggs',
+  'santa bells',
+  'santa hat',
+  'elf hat',
+  'cupid queen outfit',
+  'other cupid drops',
+  'gift of lancer',
+  'festival lancer',
+  'festival shield',
+  'festival gifts',
+];
 
-// const Boats = ['Boats', 'striker', 'coffin', 'hover', 'flamingo boat'];
+const Boats = ['Boats', 'striker', 'coffin', 'hover', 'flamingo boat'];
 
-// const KrakenStuff = [
-//   'Kraken Stuff',
-//   'both cores',
-//   'kraken core',
-//   'sb core',
-//   'red kraken set',
-//   'gold kraken set',
-//   'green kraken set',
-//   'blue kraken set',
-//   'purple kraken set',
-//   'azure kk armor',
-//   'azure kk gs',
-//   'azure cape',
-//   'azure katana',
-//   'red sb set',
-//   'blue sb set',
-//   'green sb set',
-// ];
+const KrakenStuff = [
+  'Kraken Stuff',
+  'both cores',
+  'kraken core',
+  'sb core',
+  'red kraken set',
+  'gold kraken set',
+  'green kraken set',
+  'blue kraken set',
+  'purple kraken set',
+  'azure kk armor',
+  'azure kk gs',
+  'azure cape',
+  'azure katana',
+  'red sb set',
+  'blue sb set',
+  'green sb set',
+];
 
-// const Other = [
-//   'other',
-//   'drums',
-//   'croc cape',
-//   'wb cape',
-//   'marine cape',
-//   'gravito blade',
-//   'gravito cape',
-//   'trident',
-//   'bisento',
-//   'cutlass',
-//   'kiribachi',
-//   'cho crown',
-//   'pole',
-//   'golden hook',
-//   'neptune crown',
-//   'musashi set',
-//   'musashi hat',
-//   'karuta',
-//   'spare fruit bag',
-//   'max sp resets',
-//   'max dark roots',
-// ];
+const Other = [
+  'other',
+  'drums',
+  'croc cape',
+  'wb cape',
+  'marine cape',
+  'gravito blade',
+  'gravito cape',
+  'trident',
+  'bisento',
+  'cutlass',
+  'kiribachi',
+  'cho crown',
+  'pole',
+  'golden hook',
+  'neptune crown',
+  'musashi set',
+  'musashi hat',
+  'karuta',
+  'spare fruit bag',
+  'max sp resets',
+  'max dark roots',
+];
 
-// const Other2 = [
-//   'Other2',
-//   "Ba'al core",
-//   'squid game set',
-//   'anniversary lantern',
-//   'anniversary cap',
-//   'anniversary hat',
-//   'anniversary shades',
-//   'golden hammer',
-//   'buggy cape',
-//   'cupid queen wings',
-//   'karoo',
-//   'mini bunny',
-// ];
+const Other2 = [
+  'Other2',
+  "Ba'al core",
+  'squid game set',
+  'anniversary lantern',
+  'anniversary cap',
+  'anniversary hat',
+  'anniversary shades',
+  'golden hammer',
+  'buggy cape',
+  'cupid queen wings',
+  'karoo',
+  'mini bunny',
+];
 
-// const ALL_ITEMS_STRING = [
-//   Fruits,
-//   Unobtainables,
-//   Boats,
-//   KrakenStuff,
-//   Other,
-//   Other2,
-// ];
+const TEMPLATE_CATEGORIES = [
+  Fruits,
+  Unobtainables,
+  Boats,
+  KrakenStuff,
+  Other,
+  Other2,
+];
 
-const fruitCategory: Category = {
-  id: uuid(),
-  name: 'Fruits',
-  items: [
-    { id: uuid(), name: 'Mochi', exists: true },
-    { id: uuid(), name: 'Kage', exists: false },
-    { id: uuid(), name: 'Paw', exists: true },
-  ],
-};
-
-const unobtainablesCategory: Category = {
-  id: uuid(),
-  name: 'Unobtainables',
-  items: [
-    { id: uuid(), name: 'candy cane', exists: true },
-    { id: uuid(), name: 'prestige bag', exists: true },
-    { id: uuid(), name: 'jester outfit', exists: true },
-  ],
-};
-
-const boatsCategory: Category = {
-  id: uuid(),
-  name: 'Boats',
-  items: [
-    { id: uuid(), name: 'striker', exists: false },
-    { id: uuid(), name: 'coffin', exists: true },
-    { id: uuid(), name: 'hover', exists: true },
-  ],
-};
-
-const emptyCategory: Category = {
-  id: uuid(),
-  name: 'Empty',
-  items: [],
-};
-
-const actualCategories: Category[] = [
-  fruitCategory,
-  unobtainablesCategory,
-  emptyCategory,
-  boatsCategory,
+const TEMPLATE_ACCOUNTS = [
+  'JackofAllStonks',
+  'MasterofAllStonks',
+  'HAHAFAILUREOG',
+  'HAHAFAILUREJL',
+  'kjghk5j43509i',
+  'hdgskajygwkduisga5',
+  'dsjagkjwdgh4',
+  'FakeVibeQ',
+  'Hotakiu',
+  'breuimarealhuman',
+  'TheFakeRobot',
+  'ElectrifiedTape',
+  'gkdjhsgadigi5',
+  'EmeraldyFan',
+  'sjdgakuwgd8sa',
+  'Oakkia',
+  'Golkuai',
+  'Tokkaio',
+  'theonlyguys',
+  'udigwk1j2jn',
+  'dsgahkwbedmnb2kj',
 ];
 
 const defaultAction = {
@@ -168,12 +149,6 @@ const defaultAction = {
     console.log('dummy function');
   },
 };
-
-// const dummyAccount: Account = {
-//   id: 'asdf',
-//   userName: 'chicken',
-//   categories: actualCategories,
-// };
 
 export const App = () => {
   const [accounts, setAccounts] = useState<Account[]>([]);
@@ -220,6 +195,16 @@ export const App = () => {
     }
   };
 
+  const removeCategoryFromSelectedAccount = (category: Category) => {
+    for (const a in accounts) {
+      if (accounts[a].userName === selectedAccount?.userName) {
+        const index = accounts[a].categories.indexOf(category);
+        accounts[a].categories.splice(index, 1);
+        setAccounts(() => [...accounts]);
+      }
+    }
+  };
+
   const addItemToCategory = (value: string, category: Category) => {
     const newItem: Item = { id: uuid(), name: value, exists: false };
     for (const a in accounts) {
@@ -227,6 +212,21 @@ export const App = () => {
         for (const c in accounts[a].categories) {
           if (accounts[a].categories[c] === category) {
             accounts[a].categories[c].items.push(newItem);
+            setAccounts(() => [...accounts]);
+            return;
+          }
+        }
+      }
+    }
+  };
+
+  const removeItemFromCategory = (item: Item, category: Category) => {
+    for (const a in accounts) {
+      if (accounts[a].userName === selectedAccount?.userName) {
+        for (const c in accounts[a].categories) {
+          if (accounts[a].categories[c] === category) {
+            const index = accounts[a].categories[c].items.indexOf(item);
+            accounts[a].categories[c].items.splice(index, 1);
             setAccounts(() => [...accounts]);
             return;
           }
@@ -261,6 +261,33 @@ export const App = () => {
       console.log(objectParse);
       setAccounts(objectParse);
     }
+  };
+
+  const handleLoadTemplate = () => {
+    const newCategories: Category[] = TEMPLATE_CATEGORIES.map(
+      (categoryList) => {
+        const newItems = categoryList.slice(1).map((item) => {
+          const newItem: Item = { id: uuid(), name: item, exists: false };
+          return newItem;
+        });
+        const newCategory: Category = {
+          id: uuid(),
+          name: categoryList[0],
+          items: newItems,
+        };
+
+        return newCategory;
+      }
+    );
+    const newAccounts = TEMPLATE_ACCOUNTS.map((accountName) => {
+      const newAccount: Account = {
+        id: uuid(),
+        userName: accountName,
+        categories: newCategories,
+      };
+      return newAccount;
+    });
+    setAccounts(newAccounts);
   };
 
   const handleAddAccount = (value: string) => {
@@ -301,11 +328,14 @@ export const App = () => {
       setAction(defaultAction);
     }
   };
-
   return (
     <Box>
-      <Navbar savedState={savedState} toggleDialog={handleToggleDialog} />
-      <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 5fr' }}>
+      <Navbar
+        savedState={savedState}
+        toggleDialog={handleToggleDialog}
+        loadTemplate={handleLoadTemplate}
+      />
+      <Box sx={{ display: 'flex', flexDirection: 'row' }}>
         <AccountSidebar
           accounts={accounts}
           onSelect={handleSelected}
@@ -314,11 +344,13 @@ export const App = () => {
           onRemove={handleRemoveAccount}
         />
         {selectedAccount && (
-          <ItemDisplay
+          <Inventory
             categories={selectedAccount?.categories}
             handleItemClick={handleItemClick}
             handleAddCategory={addCategoryToSelectedAccount}
             addItemToCategory={addItemToCategory}
+            onRemoveCategory={removeCategoryFromSelectedAccount}
+            removeItemFromCategory={removeItemFromCategory}
           />
         )}
         <ConfirmationDialog

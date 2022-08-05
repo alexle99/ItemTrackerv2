@@ -1,5 +1,6 @@
+import { useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
-import { Box, Button, InputBase } from '@mui/material';
+import { Box, Button, InputBase, Tooltip } from '@mui/material';
 import COLORS from '@/colors';
 import { Account } from '@/types/account';
 import { Header } from './Header';
@@ -59,11 +60,16 @@ const AccountBlock = ({
     >
       <Button
         sx={{
+          display: 'inline-block',
           fontSize: '1.5em',
           width: '100%',
           color: 'white',
           backgroundColor: 'transparent',
           paddingRight: '1rem',
+          maxWidth: '100%',
+          overflow: 'hidden',
+          whiteSpace: 'nowrap',
+          textOverflow: 'ellipsis',
         }}
         disableRipple
         onClick={() => onSelect(account)}
@@ -99,7 +105,12 @@ export const AccountSidebar = ({
   onRemove: (id: string) => void;
 }) => {
   return (
-    <Box sx={{ backgroundColor: COLORS.accountSidebarBackground }}>
+    <Box
+      sx={{
+        backgroundColor: COLORS.accountSidebarBackground,
+        maxWidth: '20vw',
+      }}
+    >
       <Header label="Accounts" color={COLORS.accountSidebarBackground} />
       <Box sx={{ paddingTop: '1.5rem' }}>
         {accounts.map((account) => {

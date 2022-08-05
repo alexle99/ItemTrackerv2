@@ -1,7 +1,6 @@
 export interface Account {
   id: string;
   userName: string;
-  // items: Item[];
   categories: Category[];
 }
 
