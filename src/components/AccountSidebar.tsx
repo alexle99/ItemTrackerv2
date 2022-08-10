@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import { Box, Button, InputBase, Tooltip } from '@mui/material';
 import COLORS from '@/colors';
@@ -108,7 +107,9 @@ export const AccountSidebar = ({
     <Box
       sx={{
         backgroundColor: COLORS.accountSidebarBackground,
-        maxWidth: '20vw',
+        // border: '1px pink solid',
+        width: '20rem',
+        height: '100%',
       }}
     >
       <Header label="Accounts" color={COLORS.accountSidebarBackground} />

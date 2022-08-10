@@ -243,7 +243,7 @@ const ItemDisplay = ({
         flexWrap: 'wrap',
         paddingLeft: '1rem',
         marginBottom: '1rem',
-        marginTop: '.5rem',
+        marginTop: '1rem',
       }}
     >
       {category.items.map((item) => {
@@ -328,7 +328,7 @@ export const Inventory = ({
         backgroundColor: COLORS.inventoryBackground,
         marginBottom: '1rem',
         height: '100%',
-        maxWidth: '100vw',
+        width: '100vw',
       }}
     >
       <InventoryHeader />

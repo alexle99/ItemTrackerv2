@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Box } from '@mui/material';
+import { Box, useMediaQuery } from '@mui/material';
 import { v4 as uuid } from 'uuid';
 import { AccountSidebar, Inventory, Navbar } from '@/components';
 import { Account, Category, Item } from '@/types/account';
@@ -155,6 +155,7 @@ export const App = () => {
   const [selectedAccount, setSelectedAccount] = useState<Account>();
   const [savedState, setSavedState] = useState(false);
   const [action, setAction] = useState(defaultAction);
+  const isSkinny = useMediaQuery('(max-width:600px)');
 
   useEffect(() => {
     setSavedState(false);
@@ -328,14 +329,17 @@ export const App = () => {
       setAction(defaultAction);
     }
   };
+
   return (
     <Box>
+      {isSkinny && <h1>mobile</h1>}
+      {/* {isVerySkinny && <h1>poop</h1>} */}
       <Navbar
         savedState={savedState}
         toggleDialog={handleToggleDialog}
         loadTemplate={handleLoadTemplate}
       />
-      <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+      <Box sx={{ display: 'flex', flexDirection: 'row', height: '100%' }}>
         <AccountSidebar
           accounts={accounts}
           onSelect={handleSelected}
